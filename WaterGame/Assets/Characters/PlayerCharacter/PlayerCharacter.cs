@@ -16,7 +16,7 @@ namespace masterFeature
             if (VirtualInputManager.Instance.moveRight && !VirtualInputManager.Instance.moveLeft)
             {
                 this.gameObject.transform.Translate(velocity * Time.deltaTime);
-                this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+                this.gameObject.transform.localScale = spriteScale;
             }
 
             else if (!VirtualInputManager.Instance.moveRight && VirtualInputManager.Instance.moveLeft)
