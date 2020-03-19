@@ -16,14 +16,15 @@ namespace masterFeature
             if (VirtualInputManager.Instance.moveRight && !VirtualInputManager.Instance.moveLeft)
             {
                 this.gameObject.transform.Translate(velocity * Time.deltaTime);
-                this.gameObject.transform.localScale = spriteScale;
+                spriteScale.x = Mathf.Abs(spriteScale.x);
             }
 
             else if (!VirtualInputManager.Instance.moveRight && VirtualInputManager.Instance.moveLeft)
             {
                 this.gameObject.transform.Translate(velocity * Time.deltaTime);
-                this.gameObject.transform.localScale = spriteScale;
+                spriteScale.x = -Mathf.Abs(spriteScale.x);
             }
+            this.gameObject.transform.localScale = spriteScale;
         }
     }
 }
