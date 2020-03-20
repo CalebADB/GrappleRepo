@@ -8,12 +8,12 @@ namespace masterFeature
     [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Idle")]
     public class PlayerCharacter_Idle : StateData
     {
-//        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-//        {
-//            getPlayerCharacter(animator).velocity.x = 0;
-//        }
+        public override void enterAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
+        {
+            
+        }
 
-        public override void updateAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator)
+        public override void updateAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             PlayerCharacter playerCharacter = playerCharacter_StateBase.getPlayerCharacter(animator);
 
@@ -21,6 +21,11 @@ namespace masterFeature
             {
                 animator.SetBool("Move", true);
             }
+        }
+
+        public override void exitAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
+        {
+
         }
     }
 }

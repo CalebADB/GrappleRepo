@@ -24,7 +24,7 @@ namespace masterFeature
             {
                 VirtualInputManager.Instance.moveRight = false;
             }
-//          if (!Input.GetKey(KeyCode.LeftShift))
+//            if (!Input.GetKey(KeyCode.LeftShift))
 //          {
 //              VirtualInputManager.Instance.run = true;
 //          }

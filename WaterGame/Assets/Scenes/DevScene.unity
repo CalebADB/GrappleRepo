@@ -130,9 +130,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368232796}
-  - component: {fileID: 368232797}
+  - component: {fileID: 368232798}
   - component: {fileID: 368232795}
   - component: {fileID: 368232794}
+  - component: {fileID: 368232797}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -171,6 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a21b26c3d421ef40879c4444dbf6424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveRight: 0
+  moveLeft: 0
   moveSpeed: 2.21
   velocity: {x: 0, y: 0}
   spriteScale: {x: 3, y: 3}
@@ -239,6 +242,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &368232798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368232793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57407e1f0fb247341a9bb6a5a168f673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
