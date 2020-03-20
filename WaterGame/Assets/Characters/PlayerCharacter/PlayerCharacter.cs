@@ -6,8 +6,12 @@ namespace masterFeature
 {
     public class PlayerCharacter : MonoBehaviour
     {
+        public bool moveRight;
+        public bool moveLeft;
+
         public float moveSpeed;
         public Vector2 velocity;
+
         public Vector2 spriteScale;
 
 
