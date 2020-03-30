@@ -6,14 +6,14 @@ namespace masterFeature
 {
     public class PlayerCharacter_StateBase : StateMachineBehaviour
     {
-        private PlayerCharacter playerCharacter;
-        public PlayerCharacter getPlayerCharacter(Animator animator)
+        private Controller controller;
+        public Controller getController(Animator animator)
         {
-            if (playerCharacter == null)
+            if (controller == null)
             {
-                playerCharacter = animator.GetComponentInParent<PlayerCharacter>();
+                controller = animator.GetComponentInParent<Controller>();
             }
-            return playerCharacter;
+            return controller;
         }
 
 

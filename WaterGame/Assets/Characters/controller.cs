@@ -4,18 +4,9 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    public class PlayerCharacter : MonoBehaviour
+    public class Controller : MonoBehaviour
     {
-        // player input
-        public bool moveRight;
-        public bool moveLeft;
-        public bool rise;
-
-        public float moveSpeed;
-        public float jumpSpeed;
-        public float riseSpeed;
-
-        // Character Environment
+        // Environment
         public enum EnvState
         {
             Grounded,
@@ -25,34 +16,78 @@ namespace masterFeature
         }
         public EnvState env;
 
-        // player physics
+        // Physics:
+        // TEMPORARY GRAVITY LOCATION // TEMPORARY GRAVITY LOCATION //
+        public float gravity;
+
+        // Input
+        public bool moveRight;
+        public bool moveLeft;
+        public bool rise;
+
+        // Speeds
+        public enum SpeedX
+        {
+            idle,
+            walk, 
+            run,  
+            duck,
+            slide
+        }
+        public Dictionary<SpeedX, float> SpeedXs = new Dictionary<SpeedX, float>()
+        {
+            {SpeedX.idle, 0.0f },
+            {SpeedX.walk, 1.0f },
+            {SpeedX.run, 2.0f  },
+            {SpeedX.duck, 0.5f },
+            {SpeedX.slide, 2.5f}
+
+        };
+
+        public enum SpeedY
+        {
+            idle,
+            jump,
+            rise
+        }
+        public Dictionary<SpeedY, float> SpeedYs = new Dictionary<SpeedY, float>()
+        {
+            {SpeedY.idle, 0.0f },
+            {SpeedY.jump, 6.0f },
+            {SpeedY.rise, 5.0f  }
+        };
+        public Vector2 stateSpeed;
+
+        // Velocity
         public Vector2 inputVelocity;
         public Vector2 envVelocity;
-        public Vector2 playerVelocity;
+        public Vector2 velocity;
+
+        // Animation
+        // prep
+        private Animator animator;
+
+        // Hashcodes
+        public int paraEnvironment;
+        public int paraVelocityX;
+        public int paraVelocityY;
+        public int paraMove;
+        public int paraJump;
+        public int paraRise;
+        public int paraEnergyBuilt;
 
         // Sprite Direction
         public Vector2 spriteScale;
 
-        // TEMPORARY GRAVITY LOCATION
-        public float gravity;
-
-        // Animation
-        private Animator animator;
-        public int paraVelocityX;
-        public int paraVelocityY;
-        public int paraMove;
-        public int paraRise;
-        public int paraEnergyBuilt;
-        public int paraEnvironmentSelection; 
-
         private void Awake()
         {
+            paraEnvironment = Animator.StringToHash("Environment");
             paraVelocityX = Animator.StringToHash("VelocityX");
             paraVelocityY = Animator.StringToHash("VelocityY");
             paraMove = Animator.StringToHash("Move");
+            paraJump = Animator.StringToHash("Jump");
             paraRise = Animator.StringToHash("Rise");
             paraEnergyBuilt = Animator.StringToHash("EnergyBuilt");
-            paraEnvironmentSelection = Animator.StringToHash("EnvironmentSelection");
         }
 
         void Update()
@@ -62,10 +97,10 @@ namespace masterFeature
             switch (env)
             {
                 case EnvState.Grounded:
+                    envVelocity.y = 0;
                     break;
                 case EnvState.Aerial:
                     envVelocity.y += gravity * Time.deltaTime;
-                    Debug.Log("I'm in the air!");
                     break;
                 case EnvState.Verticals:
                     break;
@@ -77,16 +112,17 @@ namespace masterFeature
             }
 
             //Displacement
-            playerVelocity = envVelocity + inputVelocity;
-            this.gameObject.transform.Translate(playerVelocity * Time.deltaTime);
+            velocity = envVelocity + inputVelocity;
+            this.gameObject.transform.Translate(velocity * Time.deltaTime);
+            //Reset Input
             inputVelocity.Set(0f, 0f);
 
             // Animation:
             // Prep
             animator = getAnimator();
             // Update Parameters
-            animator.SetFloat(paraVelocityX, playerVelocity.x);
-            animator.SetFloat(paraVelocityY, playerVelocity.y);
+            animator.SetFloat(paraVelocityX, velocity.x);
+            animator.SetFloat(paraVelocityY, velocity.y);
 
             // player sprite direction
             if (moveRight && !moveLeft)
@@ -107,6 +143,20 @@ namespace masterFeature
                 animator = this.GetComponentInParent<Animator>();
             }
             return animator;
+        }
+
+        public void setInputSpeed(SpeedX speedX)
+        {
+            stateSpeed.x = SpeedXs[speedX];
+        }
+        public void setInputSpeed(SpeedY speedY)
+        {
+            stateSpeed.y = SpeedYs[speedY];
+        }
+        public void setInputSpeed(SpeedX speedX, SpeedY speedY)
+        {
+            stateSpeed.x = SpeedXs[speedX];
+            stateSpeed.y = SpeedYs[speedY];
         }
     }
 }

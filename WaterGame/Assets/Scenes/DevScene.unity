@@ -172,22 +172,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a21b26c3d421ef40879c4444dbf6424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  env: 0
+  gravity: -10
   moveRight: 0
   moveLeft: 0
   rise: 0
-  moveSpeed: 2.21
-  jumpSpeed: 10
-  riseSpeed: 5
+  stateSpeed: {x: 0, y: 0}
   inputVelocity: {x: 0, y: 0}
-  env: 0
   envVelocity: {x: 0, y: 0}
-  playerVelocity: {x: 0, y: 0}
-  spriteScale: {x: 3, y: 3}
-  gravity: -20
+  velocity: {x: 0, y: 0}
+  paraEnvironment: 0
+  paraVelocityX: 0
+  paraVelocityY: 0
   paraMove: 0
+  paraJump: 0
   paraRise: 0
   paraEnergyBuilt: 0
-  paraEnvironmentSelection: 0
+  spriteScale: {x: 3, y: 3}
 --- !u!4 &368232796
 Transform:
   m_ObjectHideFlags: 0
@@ -342,7 +343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.31, z: -10}
+  m_LocalPosition: {x: 0, y: 0.22, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

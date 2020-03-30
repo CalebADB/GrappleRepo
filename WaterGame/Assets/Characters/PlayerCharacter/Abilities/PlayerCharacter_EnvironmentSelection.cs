@@ -15,8 +15,8 @@ namespace masterFeature
 
         public override void updateAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
-            PlayerCharacter playerCharacter = playerCharacter_StateBase.getPlayerCharacter(animator);
-            animator.SetInteger(playerCharacter.paraEnvironmentSelection, playerCharacter.env.GetHashCode());
+            Controller controller = playerCharacter_StateBase.getController(animator);
+            animator.SetInteger(controller.paraEnvironment, controller.env.GetHashCode());
         }
 
         public override void exitAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)

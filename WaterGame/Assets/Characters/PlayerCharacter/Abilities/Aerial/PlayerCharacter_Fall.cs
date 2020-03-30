@@ -2,29 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Grounded/Idle")]
-    public class PlayerCharacter_Idle : StateData
+    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Aerial/Fall")]
+    public class PlayerCharacter_Fall : StateData
     {
         public override void enterAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = playerCharacter_StateBase.getController(animator);
 
             // Initialise Speeds for state
-            controller.setInputSpeed(Controller.SpeedX.idle, Controller.SpeedY.idle);
+            controller.setInputSpeed(Controller.SpeedY.rise);
         }
 
+        // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         public override void updateAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = playerCharacter_StateBase.getController(animator);
 
-            // Can initiate Move
-            checkToInitMove(controller, animator);
-
-            // Can initiate Jump
-            checkToInitJump(controller, animator);
+            // Set input velocity
+            changeVelocityX(controller, animator);
+            changeVelocityY(controller, animator);
         }
 
         public override void exitAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)

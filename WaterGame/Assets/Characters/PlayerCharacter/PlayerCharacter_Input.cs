@@ -6,11 +6,11 @@ namespace masterFeature
 {
     public class PlayerCharacter_Input : MonoBehaviour
     {
-        private PlayerCharacter playerCharacter;
+        private PlayerCharacter_Controller controller;
 
         private void Awake()
         {
-            playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
+            controller = this.gameObject.GetComponent<PlayerCharacter_Controller>();
         }
 
         void Update()
@@ -20,27 +20,27 @@ namespace masterFeature
             {
                 if (VirtualInputManager.Instance.right)
                 {
-                    playerCharacter.moveRight = true;
+                    controller.moveRight = true;
                 }
                 else
                 {
-                    playerCharacter.moveRight = false;
+                    controller.moveRight = false;
                 }
                 if (VirtualInputManager.Instance.left)
                 {
-                    playerCharacter.moveLeft = true;
+                    controller.moveLeft = true;
                 }
                 else
                 {
-                    playerCharacter.moveLeft = false;
+                    controller.moveLeft = false;
                 }
                 if (VirtualInputManager.Instance.up)
                 {
-                    playerCharacter.rise = true;
+                    controller.rise = true;
                 }
                 else
                 {
-                    playerCharacter.rise = false;
+                    controller.rise = false;
                 }
             }
         }

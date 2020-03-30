@@ -9,21 +9,20 @@ namespace masterFeature
     {
         public override void enterAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
+            Controller controller = playerCharacter_StateBase.getController(animator);
 
+            // Initialise Speeds for state
+            controller.setInputSpeed(Controller.SpeedY.rise);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         public override void updateAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
-            PlayerCharacter playerCharacter = playerCharacter_StateBase.getPlayerCharacter(animator);
-            if (playerCharacter.rise)
-            {
-                playerCharacter.inputVelocity.y += playerCharacter.riseSpeed;
-            }
-            if (playerCharacter.playerVelocity.y <= 0f)
-            {
-                exitAbility(playerCharacter_StateBase, animator, stateInfo);
-            }
+            Controller controller = playerCharacter_StateBase.getController(animator);
+
+            // Set input velocity
+            changeVelocityX(controller, animator);
+            changeVelocityY(controller, animator);
         }
 
         public override void exitAbility(PlayerCharacter_StateBase playerCharacter_StateBase, Animator animator, AnimatorStateInfo stateInfo)
