@@ -6,8 +6,9 @@ namespace masterFeature
 {
     public class VirtualInputManager : Singleton<VirtualInputManager>
     {
-        public bool moveLeft;
-        public bool moveRight;
+        public bool left;
+        public bool right;
+        public bool up;
     }
 }
 

@@ -174,9 +174,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveRight: 0
   moveLeft: 0
+  rise: 0
   moveSpeed: 2.21
-  velocity: {x: 0, y: 0}
+  jumpSpeed: 10
+  riseSpeed: 5
+  inputVelocity: {x: 0, y: 0}
+  env: 0
+  envVelocity: {x: 0, y: 0}
+  playerVelocity: {x: 0, y: 0}
   spriteScale: {x: 3, y: 3}
+  gravity: -20
+  paraMove: 0
+  paraRise: 0
+  paraEnergyBuilt: 0
+  paraEnvironmentSelection: 0
 --- !u!4 &368232796
 Transform:
   m_ObjectHideFlags: 0

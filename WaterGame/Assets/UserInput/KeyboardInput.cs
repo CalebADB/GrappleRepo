@@ -10,19 +10,27 @@ namespace masterFeature
         {
             if (Input.GetKey(KeyCode.A))
             {
-                VirtualInputManager.Instance.moveLeft = true;
+                VirtualInputManager.Instance.left = true;
             }
             else
             {
-                VirtualInputManager.Instance.moveLeft = false;
+                VirtualInputManager.Instance.left = false;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                VirtualInputManager.Instance.moveRight = true;
+                VirtualInputManager.Instance.right = true;
             }
             else
             {
-                VirtualInputManager.Instance.moveRight = false;
+                VirtualInputManager.Instance.right = false;
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                VirtualInputManager.Instance.up = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.up = false;
             }
 //            if (!Input.GetKey(KeyCode.LeftShift))
 //          {

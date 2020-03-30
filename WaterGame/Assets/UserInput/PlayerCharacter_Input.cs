@@ -15,21 +15,33 @@ namespace masterFeature
 
         void Update()
         {
-            if (VirtualInputManager.Instance.moveRight)
+            bool mainGame = true;
+            if (mainGame)
             {
-                playerCharacter.moveRight = true;
-            }
-            else
-            {
-                playerCharacter.moveRight = false;
-            }
-            if (VirtualInputManager.Instance.moveLeft)
-            {
-                playerCharacter.moveLeft = true;
-            }
-            else
-            {
-                playerCharacter.moveLeft = false;
+                if (VirtualInputManager.Instance.right)
+                {
+                    playerCharacter.moveRight = true;
+                }
+                else
+                {
+                    playerCharacter.moveRight = false;
+                }
+                if (VirtualInputManager.Instance.left)
+                {
+                    playerCharacter.moveLeft = true;
+                }
+                else
+                {
+                    playerCharacter.moveLeft = false;
+                }
+                if (VirtualInputManager.Instance.up)
+                {
+                    playerCharacter.rise = true;
+                }
+                else
+                {
+                    playerCharacter.rise = false;
+                }
             }
         }
     }
