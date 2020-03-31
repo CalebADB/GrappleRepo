@@ -18,8 +18,8 @@ namespace masterFeature
             controller.setInputSpeed(Controller.SpeedY.idle);
 
             // Set environment
-            controller.env = Controller.EnvState.Grounded;
-            animator.SetInteger(controller.paraEnvironment, Controller.EnvState.Grounded.GetHashCode());
+            controller.env = Controller.EnvState.Ground;
+            animator.SetInteger(controller.paraEnvironment, Controller.EnvState.Ground.GetHashCode());
 
             // hit ground
             controller.envVelocity.y = 0;

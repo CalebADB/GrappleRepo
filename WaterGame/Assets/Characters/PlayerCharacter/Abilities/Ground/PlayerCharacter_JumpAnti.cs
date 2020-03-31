@@ -18,7 +18,7 @@ namespace masterFeature
             controller.setInputSpeed(Controller.SpeedY.jump);
 
             // Jump has been initiated so it can be turned off
-            animator.SetBool(controller.paraJump, false);
+            animator.SetBool(controller.paraJumping, false);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -44,8 +44,8 @@ namespace masterFeature
             controller.envVelocity.y = controller.stateSpeed.y;
             
             // Set environment
-            controller.env = Controller.EnvState.Aerial;
-            animator.SetInteger(controller.paraEnvironment, Controller.EnvState.Aerial.GetHashCode());
+            controller.env = Controller.EnvState.Air;
+            animator.SetInteger(controller.paraEnvironment, Controller.EnvState.Air.GetHashCode());
         }
     }
 }

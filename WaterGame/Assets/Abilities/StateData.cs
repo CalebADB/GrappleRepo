@@ -18,7 +18,7 @@ namespace masterFeature
         {
             if (controller.moveRight ^ controller.moveLeft)
             {
-                animator.SetBool(controller.paraMove, true);
+                animator.SetBool(controller.paraMoving, true);
             }
         }
 
@@ -26,11 +26,11 @@ namespace masterFeature
         {
             if (controller.rise)
             {
-                animator.SetBool(controller.paraJump, true);
+                animator.SetBool(controller.paraJumping, true);
             }
         }
 
-        public void checkToInitDuck(Controller controller, Animator animator)
+        public void checkToInitCrouch(Controller controller, Animator animator)
         {
             Debug.Log("Im an empty function:)");
         }
@@ -59,14 +59,12 @@ namespace masterFeature
         {
             if (!controller.moveRight ^ controller.moveLeft)
             {
-                animator.SetBool(controller.paraMove, false);
+                animator.SetBool(controller.paraMoving, false);
             }
         }
 
         public void checkToExitState(Controller controller, Animator animator, float timePassed, float duration)
         {
-            Debug.Log(duration);
-            Debug.Log(timePassed);
             if (timePassed >= duration)
             {
                 animator.SetBool(controller.paraEnergyBuilt, true);

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerCharacter_Land
   m_EditorClassIdentifier: 
   duration: 0
-  energyBuildDuration: 0
+  energyBuildDuration: 0.003

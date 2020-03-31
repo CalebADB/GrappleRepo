@@ -9,10 +9,10 @@ namespace masterFeature
         // Environment
         public enum EnvState
         {
-            Grounded,
-            Aerial,
-            Verticals,
-            Subaqueous
+            Ground,
+            Air,
+            Vertical,
+            Water
         }
         public EnvState env;
 
@@ -71,9 +71,11 @@ namespace masterFeature
         public int paraEnvironment;
         public int paraVelocityX;
         public int paraVelocityY;
-        public int paraMove;
-        public int paraJump;
-        public int paraRise;
+        public int paraMoving;
+        public int paraCrouching;
+        public int paraJumping;
+        public int paraRising;
+        public int paraHolding;
         public int paraEnergyBuilt;
 
         // Sprite Direction
@@ -84,9 +86,11 @@ namespace masterFeature
             paraEnvironment = Animator.StringToHash("Environment");
             paraVelocityX = Animator.StringToHash("VelocityX");
             paraVelocityY = Animator.StringToHash("VelocityY");
-            paraMove = Animator.StringToHash("Move");
-            paraJump = Animator.StringToHash("Jump");
-            paraRise = Animator.StringToHash("Rise");
+            paraMoving = Animator.StringToHash("Moving");
+            paraCrouching = Animator.StringToHash("Crouching");
+            paraJumping = Animator.StringToHash("Jumping");
+            paraRising = Animator.StringToHash("Rising");
+            paraHolding = Animator.StringToHash("Holding");
             paraEnergyBuilt = Animator.StringToHash("EnergyBuilt");
         }
 
@@ -96,15 +100,15 @@ namespace masterFeature
             // Enviromental velocity
             switch (env)
             {
-                case EnvState.Grounded:
+                case EnvState.Ground:
                     envVelocity.y = 0;
                     break;
-                case EnvState.Aerial:
+                case EnvState.Air:
                     envVelocity.y += gravity * Time.deltaTime;
                     break;
-                case EnvState.Verticals:
+                case EnvState.Vertical:
                     break;
-                case EnvState.Subaqueous:
+                case EnvState.Water:
                     break;
                 default:
                     Debug.Log("Enviroment Missing");

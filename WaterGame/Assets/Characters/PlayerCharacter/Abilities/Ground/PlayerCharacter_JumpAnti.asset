@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerCharacter_JumpAnti
   m_EditorClassIdentifier: 
   duration: 14.25418
-  energyBuildDuration: 0.158
+  energyBuildDuration: 0.007
