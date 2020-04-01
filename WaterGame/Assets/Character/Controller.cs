@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace masterFeature
             crawl,
             slide
         }
-        public Dictionary<SpeedX, float> SpeedXs = new Dictionary<SpeedX, float>()
+        public Dictionary_SpeedXfloat SpeedXs = new Dictionary_SpeedXfloat()
         {
             {SpeedX.idle, 0.0f },
             {SpeedX.walk, 2.0f },
@@ -43,18 +44,18 @@ namespace masterFeature
             {SpeedX.slide, 2.5f}
 
         };
-
+        
         public enum SpeedY
         {
             idle,
             jump,
             rise
         }
-        public Dictionary<SpeedY, float> SpeedYs = new Dictionary<SpeedY, float>()
+        public Dictionary_SpeedYfloat SpeedYs = new Dictionary_SpeedYfloat()
         {
             {SpeedY.idle, 0.0f },
             {SpeedY.jump, 6.0f },
-            {SpeedY.rise, 5.0f  }
+            {SpeedY.rise, 5.0f }
         };
         public Vector2 stateSpeed;
 
