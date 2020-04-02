@@ -13,29 +13,26 @@ namespace masterFeature
         public abstract void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
         public abstract void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
 
-
-        public void checkToInitMove(Controller controller, Animator animator)
+        public void checkToInitMove(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             if (controller.moveRight ^ controller.moveLeft)
             {
-                animator.SetBool(controller.paraMoving, true);
+                animator.SetBool(animatorHashCodes.moving, true);
             }
         }
-
-        public void checkToInitJump(Controller controller, Animator animator)
+        public void checkToInitJump(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             if (controller.rise)
             {
-                animator.SetBool(controller.paraJumping, true);
+                animator.SetBool(animatorHashCodes.jumping, true);
             }
         }
-
-        public void checkToInitCrouch(Controller controller, Animator animator)
+        public void checkToInitCrouch(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             Debug.Log("Im an empty function:)");
         }
 
-        public void changeVelocityX(Controller controller, Animator animator)
+        public void changeVelocityX(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             if (!controller.moveRight && controller.moveLeft)
             {
@@ -46,8 +43,7 @@ namespace masterFeature
                 controller.inputVelocity.x = controller.stateSpeed.x;
             }
         }
-
-        public void changeVelocityY(Controller controller, Animator animator)
+        public void changeVelocityY(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             if (controller.rise)
             {
@@ -55,19 +51,18 @@ namespace masterFeature
             }
         }
 
-        public void checkToExitMove(Controller controller, Animator animator)
+        public void checkToExitMove(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             if (!controller.moveRight ^ controller.moveLeft)
             {
-                animator.SetBool(controller.paraMoving, false);
+                animator.SetBool(animatorHashCodes.moving, false);
             }
         }
-
-        public void checkToExitState(Controller controller, Animator animator, float timePassed, float duration)
+        public void checkToExitState(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes, float timePassed, float duration)
         {
             if (timePassed >= duration)
             {
-                animator.SetBool(controller.paraEnergyBuilt, true);
+                animator.SetBool(animatorHashCodes.energyBuilt, true);
             }
         }
     }

@@ -16,9 +16,18 @@ namespace masterFeature
             return controller;
         }
 
+        private AnimatorHashCodes animatorHashCodes;
+        public AnimatorHashCodes getAnimatorHashCodes()
+        {
+            if (animatorHashCodes == null)
+            {
+                animatorHashCodes = GameObject.Find("HashCodes").GetComponent<AnimatorHashCodes>();
+            }
+            return animatorHashCodes;
+        }
+
 
         public List<StateData> abilities = new List<StateData>();
-
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

@@ -32,14 +32,6 @@ namespace masterFeature
             {
                 VirtualInputManager.Instance.up = false;
             }
-//            if (!Input.GetKey(KeyCode.LeftShift))
-//          {
-//              VirtualInputManager.Instance.run = true;
-//          }
-//          else
-//          {
-//              VirtualInputManager.Instance.run = false;
-//          }
         }
     }
 }

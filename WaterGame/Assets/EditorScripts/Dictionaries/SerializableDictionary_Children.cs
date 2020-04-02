@@ -7,6 +7,6 @@ using UnityEditor;
 namespace masterFeature
 {
     [Serializable] public class Dictionary_SpeedXfloat : SerializableDictionary<Controller.SpeedX, float> { }
-  
+
     [Serializable] public class Dictionary_SpeedYfloat : SerializableDictionary<Controller.SpeedY, float> { }
 }

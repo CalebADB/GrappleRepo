@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace masterFeature
 {
     [CreateAssetMenu(fileName = "New File", menuName = "Abilities/EnvironmentSelection")]
@@ -16,7 +15,7 @@ namespace masterFeature
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-            animator.SetInteger(controller.paraEnvironment, controller.env.GetHashCode());
+            animator.SetInteger(stateBase.getAnimatorHashCodes().environment, controller.env.GetHashCode());
         }
 
         public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)

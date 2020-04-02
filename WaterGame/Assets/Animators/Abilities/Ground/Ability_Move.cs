@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Aerial/Fall")]
-    public class Ability_Fall : StateData
+    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Grounded/Move")]
+    public class Ability_Move : StateData
     {
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
 
             // Initialise Speeds for state
-            controller.setInputSpeed(Controller.SpeedY.rise);
+            controller.setInputSpeed(Controller.SpeedX.run, Controller.SpeedY.idle);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,8 +21,13 @@ namespace masterFeature
             Controller controller = stateBase.getController(animator);
 
             // Set input velocity
-            changeVelocityX(controller, animator);
-            changeVelocityY(controller, animator);
+            changeVelocityX(animator, controller, stateBase.getAnimatorHashCodes());
+
+            // Can return to idle
+            checkToExitMove(animator, controller, stateBase.getAnimatorHashCodes());
+
+            // Can initiate Jump
+            checkToInitJump(animator, controller, stateBase.getAnimatorHashCodes());
         }
 
         public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)

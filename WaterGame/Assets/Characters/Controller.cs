@@ -35,28 +35,28 @@ namespace masterFeature
             crawl,
             slide
         }
-        public Dictionary_SpeedXfloat SpeedXs = new Dictionary_SpeedXfloat()
-        {
+        public Dictionary_SpeedXfloat SpeedXs = new Dictionary_SpeedXfloat();
+        /*{
             {SpeedX.idle, 0.0f },
             {SpeedX.walk, 2.0f },
             {SpeedX.run, 3.5f  },
             {SpeedX.crawl, 0.5f },
             {SpeedX.slide, 2.5f}
-
         };
-        
+        */
+
         public enum SpeedY
         {
             idle,
             jump,
             rise
         }
-        public Dictionary_SpeedYfloat SpeedYs = new Dictionary_SpeedYfloat()
-        {
+        public Dictionary_SpeedYfloat SpeedYs = new Dictionary_SpeedYfloat();
+        /*{
             {SpeedY.idle, 0.0f },
             {SpeedY.jump, 6.0f },
             {SpeedY.rise, 5.0f }
-        };
+        };*/
         public Vector2 stateSpeed;
 
         // Velocity
@@ -68,31 +68,15 @@ namespace masterFeature
         // prep
         private Animator animator;
 
-        // Hashcodes
-        public int paraEnvironment;
-        public int paraVelocityX;
-        public int paraVelocityY;
-        public int paraMoving;
-        public int paraCrouching;
-        public int paraJumping;
-        public int paraRising;
-        public int paraHolding;
-        public int paraEnergyBuilt;
-
         // Sprite Direction
         public Vector2 spriteScale;
 
-        private void Awake()
+        // HashCodes
+        public AnimatorHashCodes animatorHashCodes;
+
+        private void Start()
         {
-            paraEnvironment = Animator.StringToHash("Environment");
-            paraVelocityX = Animator.StringToHash("VelocityX");
-            paraVelocityY = Animator.StringToHash("VelocityY");
-            paraMoving = Animator.StringToHash("Moving");
-            paraCrouching = Animator.StringToHash("Crouching");
-            paraJumping = Animator.StringToHash("Jumping");
-            paraRising = Animator.StringToHash("Rising");
-            paraHolding = Animator.StringToHash("Holding");
-            paraEnergyBuilt = Animator.StringToHash("EnergyBuilt");
+            animatorHashCodes = GameObject.FindWithTag("HashCodes").GetComponent<AnimatorHashCodes>();
         }
 
         void Update()
@@ -126,8 +110,8 @@ namespace masterFeature
             // Prep
             animator = getAnimator();
             // Update Parameters
-            animator.SetFloat(paraVelocityX, velocity.x);
-            animator.SetFloat(paraVelocityY, velocity.y);
+            animator.SetFloat(animatorHashCodes.velocityX, velocity.x);
+            animator.SetFloat(animatorHashCodes.velocityY, velocity.y);
 
             // player sprite direction
             if (moveRight && !moveLeft)
