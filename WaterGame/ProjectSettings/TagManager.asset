@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - HashCodes
+  - PhysicsEngine
   layers:
   - Default
   - TransparentFX
@@ -39,27 +40,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 3078304095
-    locked: 0
-  - name: Midground
-    uniqueID: 583167865
-    locked: 0
-  - name: Nearground
-    uniqueID: 3724479055
-    locked: 0
-  - name: Focus
-    uniqueID: 2177790119
-    locked: 0
-  - name: Foreground
-    uniqueID: 2542946489
-    locked: 0
-  - name: Particles
-    uniqueID: 3375355137
-    locked: 0
-  - name: UI
-    uniqueID: 3975051653
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

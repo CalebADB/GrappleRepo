@@ -12,14 +12,13 @@ namespace masterFeature
         {
             Ground,
             Air,
-            Vertical,
+            Hang,
             Water
         }
         public EnvState env;
 
         // Physics:
-        // TEMPORARY GRAVITY LOCATION // TEMPORARY GRAVITY LOCATION //
-        public float gravity;
+        public PhysicsEngine physicsEngine;
 
         // Input
         public bool moveRight;
@@ -76,7 +75,6 @@ namespace masterFeature
 
         private void Start()
         {
-            animatorHashCodes = GameObject.FindWithTag("HashCodes").GetComponent<AnimatorHashCodes>();
         }
 
         void Update()
@@ -86,12 +84,12 @@ namespace masterFeature
             switch (env)
             {
                 case EnvState.Ground:
-                    envVelocity.y = 0;
                     break;
                 case EnvState.Air:
-                    envVelocity.y += gravity * Time.deltaTime;
+                    //Accelerate due to gravity
+                    envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
                     break;
-                case EnvState.Vertical:
+                case EnvState.Hang:
                     break;
                 case EnvState.Water:
                     break;
