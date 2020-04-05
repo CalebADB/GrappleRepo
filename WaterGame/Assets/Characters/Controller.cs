@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
+    [RequireComponent(typeof(CollisionManager))]
     public class Controller : MonoBehaviour
     {
         // Environment
@@ -18,6 +19,7 @@ namespace masterFeature
         public EnvState env;
 
         // Physics:
+        // Prep
         public PhysicsEngine physicsEngine;
 
         // Input
@@ -64,17 +66,21 @@ namespace masterFeature
         public Vector2 velocity;
 
         // Animation
-        // prep
+        // Prep
         private Animator animator;
 
         // Sprite Direction
         public Vector2 spriteScale;
+
+        // Sprite Direction
+        public CollisionManager collisionManager;
 
         // HashCodes
         public AnimatorHashCodes animatorHashCodes;
 
         private void Start()
         {
+            collisionManager = GetComponent<CollisionManager>();
         }
 
         void Update()

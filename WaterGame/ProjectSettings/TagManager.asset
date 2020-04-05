@@ -40,6 +40,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3851995251
+    locked: 0
+  - name: Midground
+    uniqueID: 1975772809
+    locked: 0
+  - name: Nearground
+    uniqueID: 3153676383
+    locked: 0
+  - name: Focus
+    uniqueID: 3818535973
+    locked: 0
+  - name: Foreground
+    uniqueID: 3568831297
+    locked: 0
+  - name: Particles
+    uniqueID: 3514824343
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
