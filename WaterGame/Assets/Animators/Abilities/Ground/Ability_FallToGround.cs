@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "_FallToGround", menuName = "Abilities/Ground/FallToGround")]
+/*    [CreateAssetMenu(fileName = "_FallToGround", menuName = "Abilities/Ground/FallToGround")]
     public class Ability_FallToGround : StateData
     {
         [Range(0.001f, 0.1f)]
@@ -28,17 +28,15 @@ namespace masterFeature
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-
-            // Check if energy done building
-            checkToExitState(animator, controller, stateBase.getAnimatorHashCodes(), stateInfo.normalizedTime, energyBuildDuration);
         }
 
         public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-            animator.SetBool(stateBase.getAnimatorHashCodes().grounded, false);
             // Energy released
             animator.SetBool(stateBase.getAnimatorHashCodes().energyBuilt, false);
+
+            animator.SetBool(stateBase.getAnimatorHashCodes().grounded, false);
         }
-    }
+    }*/
 }

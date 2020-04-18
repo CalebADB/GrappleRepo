@@ -10,16 +10,16 @@ namespace masterFeature
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-
-            // Initialise Speeds for state
-            if (controller.inputVelocity.x < 0.01f) { controller.setInputSpeed(Controller.SpeedX.air); }
-            controller.setInputSpeed(Controller.SpeedY.rise);
+            // reset state parameters
+            animator.SetBool(stateBase.getAnimatorHashCodes().collidedUp, false);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
+            // Initialise Speeds for state
+            controller.setInputSpeed(Controller.SpeedX.run, Controller.SpeedY.rise);
 
             // Set input velocity
             changeVelocityX(animator, controller, stateBase.getAnimatorHashCodes());

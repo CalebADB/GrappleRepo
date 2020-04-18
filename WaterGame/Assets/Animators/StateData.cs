@@ -23,6 +23,13 @@ namespace masterFeature
             if (controller.rise)
             {
                 animator.SetBool(animatorHashCodes.jumping, true);
+                controller.setInputSpeed(Controller.SpeedY.jump);
+
+                controller.envVelocity.y = controller.stateSpeed.y;
+
+                // Set environment
+                controller.env = Controller.EnvState.Air;
+                animator.SetInteger(animatorHashCodes.environment, Controller.EnvState.Air.GetHashCode());
             }
         }
         public void checkToInitCrouch(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
@@ -49,18 +56,6 @@ namespace masterFeature
             }
         }
 
-        public void checkCeiling(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
-        {
-            Debug.Log("Im an empty function:)");
-        }
-
-        public void checkToExitState(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes, float timePassed, float duration)
-        {
-            if (timePassed >= duration)
-            {
-                animator.SetBool(animatorHashCodes.energyBuilt, true);
-            }
-        }
         public void checkToExitMove(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             if (!controller.moveRight ^ controller.moveLeft)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "_GroundToRise", menuName = "Abilities/Ground/GroundToRise")]
+/*    [CreateAssetMenu(fileName = "_GroundToRise", menuName = "Abilities/Ground/GroundToRise")]
     public class Ability_GroundToRise : StateData
     {
         [Range(0.001f, 0.1f)]
@@ -27,9 +27,6 @@ namespace masterFeature
 
             // Set input velocity
             changeVelocityX(animator, controller, stateBase.getAnimatorHashCodes());
-
-            // Check if energy done building
-            checkToExitState(animator, controller, stateBase.getAnimatorHashCodes(), stateInfo.normalizedTime, energyBuildDuration);
         }
 
         public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -42,8 +39,7 @@ namespace masterFeature
             // Set environment
             controller.env = Controller.EnvState.Air;
             animator.SetInteger(stateBase.getAnimatorHashCodes().environment, Controller.EnvState.Air.GetHashCode());
-
-            animator.SetBool(stateBase.getAnimatorHashCodes().energyBuilt, false);
-        }
-    }
+        
+}
+    }*/
 }

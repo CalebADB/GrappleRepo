@@ -10,23 +10,25 @@ namespace masterFeature
         public int velocityX;
         public int velocityY;
         public int moving;
-        public int crouching;
         public int jumping;
-        public int grounded;
-        public int holding;
-        public int energyBuilt;
+        public int crouching;
+        public int objectHolding;
+        public int objectImmovable;
+        public int collidedUp;
+        public int collidedDown;
 
         private void Awake()
         {
-            environment =   Animator.StringToHash("Environment");
-            velocityX =     Animator.StringToHash("VelocityX");
-            velocityY =     Animator.StringToHash("VelocityY");
-            moving =        Animator.StringToHash("Moving");
-            crouching =     Animator.StringToHash("Crouching");
-            jumping =       Animator.StringToHash("Jumping");
-            grounded =      Animator.StringToHash("Grounded");
-            holding =       Animator.StringToHash("Holding");
-            energyBuilt =   Animator.StringToHash("EnergyBuilt");
-        }
+            environment     = Animator.StringToHash("Environment");
+            velocityX       = Animator.StringToHash("VelocityX");
+            velocityY       = Animator.StringToHash("VelocityY");
+            moving          = Animator.StringToHash("Moving");
+            jumping         = Animator.StringToHash("Jumping");
+            crouching       = Animator.StringToHash("Crouching");
+            objectHolding   = Animator.StringToHash("ObjectHolding");
+            objectImmovable = Animator.StringToHash("ObjectImmovable");
+            collidedUp      = Animator.StringToHash("CollidedUp");
+            collidedDown    = Animator.StringToHash("CollidedDown");
+        }   
     }
 }

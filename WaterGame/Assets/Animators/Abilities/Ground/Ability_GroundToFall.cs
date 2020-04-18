@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "_GroundToFall", menuName = "Abilities/Ground/GroundToFall")]
+/*    [CreateAssetMenu(fileName = "_GroundToFall", menuName = "Abilities/Ground/GroundToFall")]
     public class Ability_GroundToFall : StateData
     {
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -25,5 +25,5 @@ namespace masterFeature
             controller.env = Controller.EnvState.Air;
             animator.SetInteger(stateBase.getAnimatorHashCodes().environment, Controller.EnvState.Air.GetHashCode());
         }
-    }
+    }*/
 }

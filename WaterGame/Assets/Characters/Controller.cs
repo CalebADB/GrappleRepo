@@ -10,7 +10,8 @@ namespace masterFeature
     {
         // Debug
         public int debugInt;
-        
+        public int debugBool;
+
         // Environment
         public enum EnvState
         {
@@ -85,12 +86,11 @@ namespace masterFeature
 
             SpeedYs.Add(SpeedY.idle, 0.0f);
             SpeedYs.Add(SpeedY.jump, 8.0f);
-            SpeedYs.Add(SpeedY.rise, 2.5f);
+            SpeedYs.Add(SpeedY.rise, 0.4f);
         }
 
         private void Update()
         {
-            debugInt++;
             // Physics: 
             // Enviromental velocity
             switch (env)
@@ -98,20 +98,20 @@ namespace masterFeature
                 case EnvState.Water:
                     break;
                 case EnvState.Ground:
-                    envVelocity = physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
+                    envVelocity.y = 0f;
                     break;
                 case EnvState.Hang:
                     break;
                 case EnvState.Air:
                     if (collisionManager.collisionData.vertCollision) { envVelocity.y = 0f; }
-                    envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
                     //Accelerate due to gravity
                     break;
                 default:
                     Debug.Log("Enviroment Missing");
                     break;
             }
-
+            envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
+    
             // Calculate Velocity
             velocity = envVelocity + inputVelocity;
 
@@ -120,7 +120,7 @@ namespace masterFeature
 
             // Check for collisions
             displacement = collisionManager.updateManager(displacement);
-            
+            if (collisionManager.collisionData.vertCollision) { envVelocity.y = 0.0f; }
             // Displace object
             this.gameObject.transform.Translate(displacement);
 
@@ -129,11 +129,23 @@ namespace masterFeature
             // Prep
             animator = getAnimator();
             // Update Parameters
-            if (collisionManager.collisionData.vertCollision)
+
+            if (collisionManager.collisionData.vertCollision && (collisionManager.collisionData.vertCollisionDistance < -0.000001))
             {
-                animator.SetBool(animatorHashCodes.grounded, collisionManager.collisionData.vertCollision);
+                Debug.Log("down" + collisionManager.collisionData.vertCollisionDistance);
+                animator.SetBool(animatorHashCodes.collidedDown, true);
             }
-            
+            else if (collisionManager.collisionData.vertCollision && (collisionManager.collisionData.vertCollisionDistance > 0.000001))
+            {
+                Debug.Log("up" + collisionManager.collisionData.vertCollisionDistance);
+                animator.SetBool(animatorHashCodes.collidedUp, true);
+            }
+            else
+            {
+                animator.SetBool(animatorHashCodes.collidedUp, false);
+                animator.SetBool(animatorHashCodes.collidedDown, false);
+            }
+
             animator.SetFloat(animatorHashCodes.velocityX, velocity.x);
             animator.SetFloat(animatorHashCodes.velocityY, velocity.y);
 
@@ -148,6 +160,8 @@ namespace masterFeature
             }
             this.gameObject.transform.localScale = spriteScale;
 
+            //Debug
+            //Debug.Log("debugInt" + debugInt);
 
             //Reset
             inputVelocity.Set(0f, 0f);
