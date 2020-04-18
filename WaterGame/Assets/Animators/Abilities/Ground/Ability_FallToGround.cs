@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Grounded/JumpAnti")]
-    public class Ability_JumpAnti : StateData
+    [CreateAssetMenu(fileName = "_FallToGround", menuName = "Abilities/Ground/FallToGround")]
+    public class Ability_FallToGround : StateData
     {
         [Range(0.001f, 0.1f)]
         public float energyBuildDuration;
@@ -13,21 +13,21 @@ namespace masterFeature
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
+            // Set environment
+            controller.env = Controller.EnvState.Ground;
+            animator.SetInteger(stateBase.getAnimatorHashCodes().environment, Controller.EnvState.Ground.GetHashCode());
 
             // Initialise Speeds for state
-            controller.setInputSpeed(Controller.SpeedY.jump);
+            controller.setInputSpeed(Controller.SpeedY.idle);
 
-            // Jump has been initiated so it can be turned off
-            animator.SetBool(stateBase.getAnimatorHashCodes().jumping, false);
+            // hit ground
+            controller.envVelocity.y = 0;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-
-            // Set input velocity
-            changeVelocityX(animator, controller, stateBase.getAnimatorHashCodes());
 
             // Check if energy done building
             checkToExitState(animator, controller, stateBase.getAnimatorHashCodes(), stateInfo.normalizedTime, energyBuildDuration);
@@ -36,16 +36,9 @@ namespace masterFeature
         public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-
-            // Energy was released
+            animator.SetBool(stateBase.getAnimatorHashCodes().grounded, false);
+            // Energy released
             animator.SetBool(stateBase.getAnimatorHashCodes().energyBuilt, false);
-
-            // accelerate off ground
-            controller.envVelocity.y = controller.stateSpeed.y;
-            
-            // Set environment
-            controller.env = Controller.EnvState.Air;
-            animator.SetInteger(stateBase.getAnimatorHashCodes().environment, Controller.EnvState.Air.GetHashCode());
         }
     }
 }

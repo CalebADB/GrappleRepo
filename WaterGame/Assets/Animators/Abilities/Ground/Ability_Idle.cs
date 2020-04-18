@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Grounded/Idle")]
+    [CreateAssetMenu(fileName = "_Idle", menuName = "Abilities/Ground/Idle")]
     public class Ability_Idle : StateData
     {
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -18,7 +18,6 @@ namespace masterFeature
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-
             // Can initiate Move
             checkToInitMove(animator, controller, stateBase.getAnimatorHashCodes());
 

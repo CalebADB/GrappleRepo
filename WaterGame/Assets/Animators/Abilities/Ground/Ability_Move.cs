@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Grounded/Move")]
+    [CreateAssetMenu(fileName = "_Move", menuName = "Abilities/Ground/Move")]
     public class Ability_Move : StateData
     {
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -15,7 +15,6 @@ namespace masterFeature
             controller.setInputSpeed(Controller.SpeedX.run, Controller.SpeedY.idle);
         }
 
-        // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);

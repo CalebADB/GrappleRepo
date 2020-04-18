@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/Aerial/Rise")]
+    [CreateAssetMenu(fileName = "_Rise", menuName = "Abilities/Aerial/Rise")]
     public class Ability_Rise : StateData
     {
         public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -12,6 +12,7 @@ namespace masterFeature
             Controller controller = stateBase.getController(animator);
 
             // Initialise Speeds for state
+            if (controller.inputVelocity.x < 0.01f) { controller.setInputSpeed(Controller.SpeedX.air); }
             controller.setInputSpeed(Controller.SpeedY.rise);
         }
 

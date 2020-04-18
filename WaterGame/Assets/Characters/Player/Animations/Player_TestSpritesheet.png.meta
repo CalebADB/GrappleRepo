@@ -74,6 +74,39 @@ TextureImporter:
   - first:
       213: 8916276277331880333
     second: Player_TestSpritesheet_11
+  - first:
+      213: 6911532239103350636
+    second: Player_TestSpritesheet_1
+  - first:
+      213: 1398994601197340227
+    second: Player_TestSpritesheet_2
+  - first:
+      213: -4837679962521331697
+    second: Player_TestSpritesheet_3
+  - first:
+      213: -8178601455932998183
+    second: Player_TestSpritesheet_4
+  - first:
+      213: -6261022037362142394
+    second: Player_TestSpritesheet_5
+  - first:
+      213: -4590850339458523097
+    second: Player_TestSpritesheet_6
+  - first:
+      213: -3163969532692701372
+    second: Player_TestSpritesheet_7
+  - first:
+      213: 484635609082278653
+    second: Player_TestSpritesheet_8
+  - first:
+      213: -2674073995444327159
+    second: Player_TestSpritesheet_9
+  - first:
+      213: 1949638923085248114
+    second: Player_TestSpritesheet_10
+  - first:
+      213: 8869342855593839963
+    second: Player_TestSpritesheet_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:

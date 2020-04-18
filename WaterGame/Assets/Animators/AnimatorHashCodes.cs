@@ -12,7 +12,7 @@ namespace masterFeature
         public int moving;
         public int crouching;
         public int jumping;
-        public int rising;
+        public int grounded;
         public int holding;
         public int energyBuilt;
 
@@ -24,7 +24,7 @@ namespace masterFeature
             moving =        Animator.StringToHash("Moving");
             crouching =     Animator.StringToHash("Crouching");
             jumping =       Animator.StringToHash("Jumping");
-            rising =        Animator.StringToHash("Rising");
+            grounded =      Animator.StringToHash("Grounded");
             holding =       Animator.StringToHash("Holding");
             energyBuilt =   Animator.StringToHash("EnergyBuilt");
         }

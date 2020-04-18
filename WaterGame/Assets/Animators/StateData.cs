@@ -7,8 +7,6 @@ namespace masterFeature
 {
     public abstract class StateData : ScriptableObject
     {
-        public float duration;
-
         public abstract void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
         public abstract void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
         public abstract void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
@@ -51,18 +49,23 @@ namespace masterFeature
             }
         }
 
-        public void checkToExitMove(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
+        public void checkCeiling(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
-            if (!controller.moveRight ^ controller.moveLeft)
-            {
-                animator.SetBool(animatorHashCodes.moving, false);
-            }
+            Debug.Log("Im an empty function:)");
         }
+
         public void checkToExitState(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes, float timePassed, float duration)
         {
             if (timePassed >= duration)
             {
                 animator.SetBool(animatorHashCodes.energyBuilt, true);
+            }
+        }
+        public void checkToExitMove(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
+        {
+            if (!controller.moveRight ^ controller.moveLeft)
+            {
+                animator.SetBool(animatorHashCodes.moving, false);
             }
         }
     }
