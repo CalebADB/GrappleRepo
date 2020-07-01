@@ -193,7 +193,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368232796}
-  - component: {fileID: 368232798}
   - component: {fileID: 368232795}
   - component: {fileID: 368232801}
   - component: {fileID: 368232800}
@@ -202,7 +201,7 @@ GameObject:
   - component: {fileID: 368232797}
   m_Layer: 8
   m_Name: Player_Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,18 +311,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &368232798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 368232793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57407e1f0fb247341a9bb6a5a168f673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &368232799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -654,6 +641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 634815243}
+  - component: {fileID: 634815244}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -676,6 +664,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &634815244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634815242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57407e1f0fb247341a9bb6a5a168f673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: 1
 --- !u!4 &750255330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6586679110135485689, guid: befe877b7313b9d49a97826a5a69d961,

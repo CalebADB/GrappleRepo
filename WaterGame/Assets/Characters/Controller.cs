@@ -50,8 +50,11 @@ namespace masterFeature
 
         private void Update()
         {
-            // Update Subsystems
+            // Physics
+
             localPhysicsEngine.updateEngine();
+
+            // Animation
             updateAnimatorParameters();
 
             //Debug
@@ -59,6 +62,11 @@ namespace masterFeature
 
             // Reset
             localPhysicsEngine.frameReset();
+        }
+
+        public Vector2 calculateInputVelocity()
+        {
+            return Vector2.zero;
         }
 
         public LocalPhysicsEngine getLocalPhysicsEngine()
