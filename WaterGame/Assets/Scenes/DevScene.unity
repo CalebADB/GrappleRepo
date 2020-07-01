@@ -194,10 +194,11 @@ GameObject:
   m_Component:
   - component: {fileID: 368232796}
   - component: {fileID: 368232798}
-  - component: {fileID: 368232794}
   - component: {fileID: 368232795}
+  - component: {fileID: 368232801}
   - component: {fileID: 368232800}
   - component: {fileID: 368232799}
+  - component: {fileID: 368232794}
   - component: {fileID: 368232797}
   m_Layer: 8
   m_Name: Player_Character
@@ -239,46 +240,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugInt: 0
   debugBool: 0
-  env: 1
-  physicsEngine: {fileID: 1299527154}
-  collisionManager: {fileID: 368232800}
   moveRight: 0
   moveLeft: 0
   rise: 0
-  SpeedXs:
-    _Buckets: ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-    _HashCodes: 00000000000000000000000000000000000000000000000000000000
-    _Next: 00000000000000000000000000000000000000000000000000000000
-    _Count: 0
-    _Version: 6
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys: 00000000000000000000000000000000000000000000000000000000
-    _Values:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-  SpeedYs:
-    _Buckets: ffffffffffffffffffffffff
-    _HashCodes: 000000000000000000000000
-    _Next: 000000000000000000000000
-    _Count: 0
-    _Version: 8
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys: 000000000000000000000000
-    _Values:
-    - 0
-    - 0
-    - 0
-  stateSpeed: {x: 0, y: 0}
-  inputVelocity: {x: 0, y: 0}
-  envVelocity: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
+  env: 2
+  localPhysicsEngine: {fileID: 368232801}
   spriteScale: {x: 2, y: 2}
   animatorHashCodes: {fileID: 1637052622}
 --- !u!4 &368232796
@@ -398,11 +364,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 512
-  collider: {fileID: 368232799}
-  debugRayMultiplier: 3
-  vertRayCount: 5
-  horzRayCount: 4
+    m_Bits: 0
+  collider: {fileID: 0}
+  debugRayMultiplier: 0
+  vertRayCount: 0
+  horzRayCount: 0
+--- !u!114 &368232801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368232793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5a066a5bccc0b4d944b944dd0f45d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsEngine: {fileID: 1299527154}
+  localCollisionManager: {fileID: 368232800}
+  env: 0
+  SpeedXs:
+    _Buckets: ffffffffffffffffffffffff
+    _HashCodes: 000000000000000000000000
+    _Next: 000000000000000000000000
+    _Count: 0
+    _Version: 0
+    _FreeList: -1
+    _FreeCount: 0
+    _Keys: 000000000000000000000000
+    _Values:
+    - 0
+    - 0
+    - 0
+  SpeedYs:
+    _Buckets: ffffffffffffffffffffffff
+    _HashCodes: 000000000000000000000000
+    _Next: 000000000000000000000000
+    _Count: 0
+    _Version: 0
+    _FreeList: -1
+    _FreeCount: 0
+    _Keys: 000000000000000000000000
+    _Values:
+    - 0
+    - 0
+    - 0
+  stateSpeed: {x: 0, y: 0}
+  inputVelocity: {x: 0, y: 0}
+  envVelocity: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
 --- !u!1 &446761735
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +488,7 @@ Transform:
   m_Children:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464682931
 GameObject:
@@ -632,7 +643,7 @@ Transform:
   - {fileID: 1593129279}
   - {fileID: 907647324}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &634815242
 GameObject:
@@ -663,7 +674,7 @@ Transform:
   m_Children:
   - {fileID: 1870243793}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &750255330 stripped
 Transform:
@@ -982,7 +993,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1257719445
 GameObject:
@@ -1044,7 +1055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af065c2df90884e49860d47e88fd27b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityStrength: {x: 0, y: 25}
+  gravityStrength: {x: 0, y: 30}
 --- !u!4 &1299527153
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,11 +1292,12 @@ MonoBehaviour:
   velocityX: 0
   velocityY: 0
   moving: 0
-  crouching: 0
   jumping: 0
-  grounded: 0
-  holding: 0
-  energyBuilt: 0
+  crouching: 0
+  objectHolding: 0
+  objectImmovable: 0
+  collidedUp: 0
+  collidedDown: 0
 --- !u!4 &1637052623
 Transform:
   m_ObjectHideFlags: 0

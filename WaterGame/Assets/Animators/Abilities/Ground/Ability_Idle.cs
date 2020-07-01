@@ -17,14 +17,12 @@ namespace masterFeature
         public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
-            // Initialise Speeds for state
-            controller.setInputSpeed(Controller.SpeedX.run, Controller.SpeedY.idle);
-
+            
             // Can initiate Jump
-            checkToInitJump(animator, controller, stateBase.getAnimatorHashCodes());
+            checkToJump(animator, controller, stateBase.getAnimatorHashCodes());
 
             // Check to initiate Move
-            checkToInitMove(animator, controller, stateBase.getAnimatorHashCodes());
+            checkToMove(animator, controller, stateBase.getAnimatorHashCodes());
         }
 
         public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)

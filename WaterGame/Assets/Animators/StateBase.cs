@@ -37,6 +37,7 @@ namespace masterFeature
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             updateAbilities(this, animator, stateInfo);
+
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

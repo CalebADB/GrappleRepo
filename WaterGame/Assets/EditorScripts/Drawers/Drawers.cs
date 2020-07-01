@@ -7,8 +7,8 @@ using UnityEditor;
 namespace masterFeature
 {
     [CustomPropertyDrawer(typeof(Dictionary_SpeedXfloat))]
-    public class Dictionary_SpeedXfloat_Drawer : SerializableDictionary_Drawer<Controller.SpeedX, float> { }
+    public class Dictionary_SpeedXfloat_Drawer : SerializableDictionary_Drawer<LocalPhysicsEngine.SpeedX, float> { }
 
     [CustomPropertyDrawer(typeof(Dictionary_SpeedYfloat))]
-    public class Dictionary_SpeedYfloat_Drawer : SerializableDictionary_Drawer<Controller.SpeedY, float> { }
+    public class Dictionary_SpeedYfloat_Drawer : SerializableDictionary_Drawer<LocalPhysicsEngine.SpeedY, float> { }
 }

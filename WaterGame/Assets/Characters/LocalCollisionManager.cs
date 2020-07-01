@@ -6,9 +6,10 @@ using UnityEngine;
 namespace masterFeature
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class CollisionManager : MonoBehaviour
+    public class LocalCollisionManager : MonoBehaviour
     {
         public LayerMask collisionMask;
+
         public new BoxCollider2D collider;
         public CollisionData collisionData;
         private RaycastOrigins raycastOrigins;
