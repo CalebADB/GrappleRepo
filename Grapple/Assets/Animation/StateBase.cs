@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace masterFeature
 {
+    /// <summary>
+    /// Statebase is the script that facilitates the communication between its contained states and its parent animator.
+    /// </summary>
     public class StateBase : StateMachineBehaviour
     {
+        // protected objects
         private Controller controller;
         public Controller getController(Animator animator)
         {
@@ -15,7 +19,6 @@ namespace masterFeature
             }
             return controller;
         }
-
         private AnimatorHashCodes animatorHashCodes;
         public AnimatorHashCodes getAnimatorHashCodes()
         {
@@ -26,46 +29,44 @@ namespace masterFeature
             return animatorHashCodes;
         }
 
+        // Container for States (the list allows for modularity)
+        public List<StateData> states = new List<StateData>();
 
-        public List<StateData> abilities = new List<StateData>();
-
+        // Key animation functions that are overridden. 
+        // This is done so StateBase can update a LIST of states, additionally allowing for modularity
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            startAbilities(this, animator, stateInfo);
+            enterStates(this, animator, stateInfo);
         }
-
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            updateAbilities(this, animator, stateInfo);
-
+            updateStates(this, animator, stateInfo);
         }
-
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            exitAbilities(this, animator, stateInfo);
+            exitStates(this, animator, stateInfo);
         }
 
-        public void startAbilities(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
+        // Runs the corresponding functions for each state in the state list (states).
+        public void enterStates(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
-            foreach (StateData ability in abilities)
+            foreach (StateData state in states)
             {
-                ability.enterAbility(stateBase, animator, stateInfo);
+                state.enterState(stateBase, animator, stateInfo);
             }
         }
-
-        public void updateAbilities(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public void updateStates(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
-            foreach (StateData ability in abilities)
+            foreach (StateData state in states)
             {
-                ability.updateAbility(stateBase, animator, stateInfo);
+                state.updateState(stateBase, animator, stateInfo);
             }
         }
-
-        public void exitAbilities(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public void exitStates(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
-            foreach (StateData ability in abilities)
+            foreach (StateData state in states)
             {
-                ability.exitAbility(stateBase, animator, stateInfo);
+                state.exitState(stateBase, animator, stateInfo);
             }
         }
     }

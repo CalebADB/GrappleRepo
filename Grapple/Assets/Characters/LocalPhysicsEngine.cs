@@ -40,13 +40,9 @@ namespace masterFeature
         public Vector2 envVelocity;
         public Vector2 velocity;
 
-        // Acceleration
-        public float antiGravity;
-
         // final displacement
         private Vector2 displacement;
 
-        // Start is called before the first frame update
         private void Start()
         {
             localCollisionManager = GetComponent<LocalCollisionManager>();
@@ -59,10 +55,18 @@ namespace masterFeature
 
             speedYDict.Add(SpeedYs.zero, 0.0f);
             speedYDict.Add(SpeedYs.jump, 5.0f);
-            speedYDict.Add(SpeedYs.rise, 5.0f);
+            speedYDict.Add(SpeedYs.rise, 4.0f);
         }
 
-        // Update is called once per frame
+        public Controller getController()
+        {
+            if (parentController == null)
+            {
+                parentController = GetComponentInParent<Controller>();
+            }
+            return parentController;
+        }
+
         public void updateEngine()
         {
             //setup
@@ -70,8 +74,8 @@ namespace masterFeature
             parentController = getController();
 
             // Calculate Velocity
-            calculateInputVelocity();
-            calculateEnvVelocity();
+            updateInputVelocity();
+            updateEnvVelocity();
             velocity = envVelocity + inputVelocity;
 
             // Calculate displacement
@@ -107,17 +111,9 @@ namespace masterFeature
             stateSpeed.y = speedYDict[speedY];
         }
 
-        public Controller getController()
+        public void updateInputVelocity()
         {
-            if (parentController == null)
-            {
-                parentController = GetComponentInParent<Controller>();
-            }
-            return parentController;
-        }
-
-        public void calculateInputVelocity()
-        {
+            // SET State Speed based on the parents environment
             switch (parentController.env)
             {
                 case Controller.EnvState.Empty:
@@ -143,6 +139,7 @@ namespace masterFeature
                     break;
             }
 
+            // UPDATE velocity using statespeed and input
             if (parentController.rise) { inputVelocity.y = stateSpeed.y; }
             if (parentController.moveRight ^ parentController.moveLeft)
             {
@@ -150,8 +147,9 @@ namespace masterFeature
                 else { inputVelocity.x = -stateSpeed.x; }
             }
         }
-        private void calculateEnvVelocity()
+        private void updateEnvVelocity()
         {
+            // SET State Speed based on the parents environment
             switch (parentController.env)
             {
                 case Controller.EnvState.Empty:
@@ -171,6 +169,8 @@ namespace masterFeature
                     Debug.Log("Enviroment Missing");
                     break;
             }
+
+            // UPDATE velocity using statespeed and input
             envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
         }
 

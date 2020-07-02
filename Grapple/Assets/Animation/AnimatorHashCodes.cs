@@ -6,12 +6,13 @@ namespace masterFeature
 {
     public class AnimatorHashCodes : MonoBehaviour
     {
+        // Hashcodes for animation references KEEP ORDER CONSISTENT
         public int environment;
         public int velocityX;
         public int velocityY;
         public int moving;
         public int jumping;
-        public int crouching;
+        public int dropping;
         public int objectHolding;
         public int objectImmovable;
         public int collidedUp;
@@ -19,12 +20,13 @@ namespace masterFeature
 
         private void Awake()
         {
+            // Hashcode initialization KEEP ORDER CONSISTENT
             environment     = Animator.StringToHash("Environment");
             velocityX       = Animator.StringToHash("VelocityX");
             velocityY       = Animator.StringToHash("VelocityY");
             moving          = Animator.StringToHash("Moving");
             jumping         = Animator.StringToHash("Jumping");
-            crouching       = Animator.StringToHash("Crouching");
+            dropping        = Animator.StringToHash("Dropping");
             objectHolding   = Animator.StringToHash("ObjectHolding");
             objectImmovable = Animator.StringToHash("ObjectImmovable");
             collidedUp      = Animator.StringToHash("CollidedUp");

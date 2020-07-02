@@ -12,6 +12,10 @@ namespace masterFeature
         public int debugInt;
         public int debugBool;
 
+        // Physics:
+        // Prep
+        public LocalPhysicsEngine localPhysicsEngine;
+
         // Input
         public bool moveRight;
         public bool moveLeft;
@@ -28,10 +32,6 @@ namespace masterFeature
             Air
         }
         public EnvState env;
-
-        // Physics:
-        // Prep
-        public LocalPhysicsEngine localPhysicsEngine;
 
         // Animation:
         // Prep
@@ -52,14 +52,10 @@ namespace masterFeature
         private void Update()
         {
             // Physics
-
             localPhysicsEngine.updateEngine();
 
             // Animation
-            updateAnimatorParameters();
-
-            //Debug
-            //Debug.Log("debugInt" + debugInt)
+            setAnimatorParameters();
         }
 
         public LocalPhysicsEngine getLocalPhysicsEngine()
@@ -80,17 +76,20 @@ namespace masterFeature
             return animator;
         }
 
-        public void updateAnimatorParameters()
+        public void setAnimatorParameters()
         {
+            // SET animator velocity floats
+            animator.SetFloat(animatorHashCodes.velocityX, localPhysicsEngine.velocity.x);
+            animator.SetFloat(animatorHashCodes.velocityY, localPhysicsEngine.velocity.y);
+
+            // SET animator vertical collision bools
             LocalCollisionManager.CollisionData collisionData = localPhysicsEngine.localCollisionManager.collisionData;
             if (collisionData.bottomCollision)
             {
-                Debug.Log("down" + collisionData.vertCollisionDistance);
                 animator.SetBool(animatorHashCodes.collidedDown, true);
             }
             else if (collisionData.topCollision)
             {
-                Debug.Log("up" + collisionData.vertCollisionDistance);
                 animator.SetBool(animatorHashCodes.collidedUp, true);
             }
             else
@@ -99,10 +98,7 @@ namespace masterFeature
                 animator.SetBool(animatorHashCodes.collidedDown, false);
             }
 
-            animator.SetFloat(animatorHashCodes.velocityX, localPhysicsEngine.velocity.x);
-            animator.SetFloat(animatorHashCodes.velocityY, localPhysicsEngine.velocity.y);
-
-            // player sprite direction
+            // SET player sprite direction (Decide to mirror the sprite)
             if (moveRight && !moveLeft)
             {
                 spriteScale.x = Mathf.Abs(spriteScale.x);

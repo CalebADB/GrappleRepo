@@ -4,17 +4,20 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [CreateAssetMenu(fileName = "_Move", menuName = "Abilities/Ground/Move")]
-    public class Ability_Move : StateData
+    /// <summary>
+    /// State in which the object is moving laterally. Environment: Ground
+    /// </summary>
+    [CreateAssetMenu(fileName = "_Move", menuName = "States/Ground/Move")]
+    public class State_Move : StateData
     {
-        public override void enterAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public override void enterState(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
             // reset state parameters
             animator.SetBool(stateBase.getAnimatorHashCodes().jumping, false);
         }
 
-        public override void updateAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public override void updateState(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
             Controller controller = stateBase.getController(animator);
 
@@ -25,7 +28,7 @@ namespace masterFeature
             checkToIdle(animator, controller, stateBase.getAnimatorHashCodes());
         }
 
-        public override void exitAbility(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public override void exitState(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
 
         }

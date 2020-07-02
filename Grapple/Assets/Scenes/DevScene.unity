@@ -239,12 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugInt: 0
   debugBool: 0
+  localPhysicsEngine: {fileID: 368232801}
   moveRight: 0
   moveLeft: 0
   rise: 0
   drop: 0
   env: 2
-  localPhysicsEngine: {fileID: 368232801}
   spriteScale: {x: 2, y: 2}
   animatorHashCodes: {fileID: 1637052622}
 --- !u!4 &368232796
@@ -350,11 +350,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408d6be33dffc644ac4a858b4d39391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugRayMultiplier: 1
   collisionMask:
     serializedVersion: 2
     m_Bits: 512
   collider: {fileID: 368232799}
-  debugRayMultiplier: 1
   vertRayCount: 4
   horzRayCount: 4
 --- !u!114 &368232801
@@ -401,7 +401,6 @@ MonoBehaviour:
   inputVelocity: {x: 0, y: 0}
   envVelocity: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
-  antiGravity: 10.43
 --- !u!1 &446761735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af065c2df90884e49860d47e88fd27b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityStrength: {x: 0, y: 20}
+  gravityStrength: {x: 0, y: 17}
 --- !u!4 &1299527153
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,8 +1083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a38db513f11624cab5f4fef6d2e90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: {fileID: 1299527152}
   timeDialation: 1
+  gravity: {fileID: 1299527152}
 --- !u!1 &1356687353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1295,7 @@ MonoBehaviour:
   velocityY: 0
   moving: 0
   jumping: 0
-  crouching: 0
+  dropping: 0
   objectHolding: 0
   objectImmovable: 0
   collidedUp: 0
