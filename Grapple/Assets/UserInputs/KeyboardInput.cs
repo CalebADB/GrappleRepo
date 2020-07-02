@@ -8,6 +8,9 @@ namespace masterFeature
     {
         void Update()
         {
+            VirtualInputManager.Instance.cursorX = Input.mousePosition.x / 32;
+            VirtualInputManager.Instance.cursorY = Input.mousePosition.y / 32;
+
             if (Input.GetKey(KeyCode.A))
             {
                 VirtualInputManager.Instance.left = true;

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HashCodes
   - PhysicsEngine
+  - Cursor
   layers:
   - Default
   - TransparentFX
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: Particles
     uniqueID: 3514824343
+    locked: 0
+  - name: UI
+    uniqueID: 2341511785
     locked: 0
   - name: Default
     uniqueID: 0

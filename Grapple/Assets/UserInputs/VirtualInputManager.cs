@@ -9,6 +9,8 @@ namespace masterFeature
     /// </summary>
     public class VirtualInputManager : Singleton<VirtualInputManager>
     {
+        public float cursorX;
+        public float cursorY;
         public bool left;
         public bool right;
         public bool up;
