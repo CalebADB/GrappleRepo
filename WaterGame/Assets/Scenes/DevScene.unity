@@ -182,7 +182,7 @@ Transform:
   - {fileID: 1793584700}
   - {fileID: 835928630}
   m_Father: {fileID: 1445307801}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368232793
 GameObject:
@@ -242,6 +242,7 @@ MonoBehaviour:
   moveRight: 0
   moveLeft: 0
   rise: 0
+  drop: 0
   env: 2
   localPhysicsEngine: {fileID: 368232801}
   spriteScale: {x: 2, y: 2}
@@ -324,7 +325,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012104865, y: 0.14611687}
+  m_Offset: {x: 0, y: 0.14611687}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -351,11 +352,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
-  collider: {fileID: 0}
-  debugRayMultiplier: 0
-  vertRayCount: 0
-  horzRayCount: 0
+    m_Bits: 512
+  collider: {fileID: 368232799}
+  debugRayMultiplier: 1
+  vertRayCount: 4
+  horzRayCount: 4
 --- !u!114 &368232801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,8 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsEngine: {fileID: 1299527154}
   localCollisionManager: {fileID: 368232800}
-  env: 0
-  SpeedXs:
+  speedXDict:
     _Buckets: ffffffffffffffffffffffff
     _HashCodes: 000000000000000000000000
     _Next: 000000000000000000000000
@@ -384,7 +384,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-  SpeedYs:
+  speedYDict:
     _Buckets: ffffffffffffffffffffffff
     _HashCodes: 000000000000000000000000
     _Next: 000000000000000000000000
@@ -401,6 +401,7 @@ MonoBehaviour:
   inputVelocity: {x: 0, y: 0}
   envVelocity: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  antiGravity: 10.43
 --- !u!1 &446761735
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +506,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1445307801}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -712,7 +713,7 @@ Transform:
   m_Children:
   - {fileID: 368232796}
   m_Father: {fileID: 1445307801}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &835928629
 GameObject:
@@ -1024,7 +1025,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1445307801}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299527151
 GameObject:
@@ -1056,7 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af065c2df90884e49860d47e88fd27b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityStrength: {x: 0, y: 30}
+  gravityStrength: {x: 0, y: 20}
 --- !u!4 &1299527153
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,6 +1085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: {fileID: 1299527152}
+  timeDialation: 1
 --- !u!1 &1356687353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,10 +1144,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 816022436}
   - {fileID: 50356022}
   - {fileID: 1257719446}
   - {fileID: 464682932}
+  - {fileID: 816022436}
   m_Father: {fileID: 634532261}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1550,7 +1552,7 @@ PrefabInstance:
     - target: {fileID: 6586679110135485689, guid: befe877b7313b9d49a97826a5a69d961,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.295
       objectReference: {fileID: 0}
     - target: {fileID: 6586679110135485689, guid: befe877b7313b9d49a97826a5a69d961,
         type: 3}

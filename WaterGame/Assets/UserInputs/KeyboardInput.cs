@@ -32,6 +32,14 @@ namespace masterFeature
             {
                 VirtualInputManager.Instance.up = false;
             }
+            if (Input.GetKey(KeyCode.S))
+            {
+                VirtualInputManager.Instance.down = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.down = false;
+            }
         }
     }
 }

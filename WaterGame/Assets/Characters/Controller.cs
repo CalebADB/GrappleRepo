@@ -16,6 +16,7 @@ namespace masterFeature
         public bool moveRight;
         public bool moveLeft;
         public bool rise;
+        public bool drop;
 
         // Environment
         public enum EnvState
@@ -59,14 +60,6 @@ namespace masterFeature
 
             //Debug
             //Debug.Log("debugInt" + debugInt)
-
-            // Reset
-            localPhysicsEngine.frameReset();
-        }
-
-        public Vector2 calculateInputVelocity()
-        {
-            return Vector2.zero;
         }
 
         public LocalPhysicsEngine getLocalPhysicsEngine()
@@ -90,12 +83,12 @@ namespace masterFeature
         public void updateAnimatorParameters()
         {
             LocalCollisionManager.CollisionData collisionData = localPhysicsEngine.localCollisionManager.collisionData;
-            if (collisionData.vertCollision && (collisionData.vertCollisionDistance < -0.000001))
+            if (collisionData.bottomCollision)
             {
                 Debug.Log("down" + collisionData.vertCollisionDistance);
                 animator.SetBool(animatorHashCodes.collidedDown, true);
             }
-            else if (collisionData.vertCollision && (collisionData.vertCollisionDistance > 0.000001))
+            else if (collisionData.topCollision)
             {
                 Debug.Log("up" + collisionData.vertCollisionDistance);
                 animator.SetBool(animatorHashCodes.collidedUp, true);

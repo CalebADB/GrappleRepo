@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace masterFeature
 {
-    [Serializable] public class Dictionary_SpeedXfloat : SerializableDictionary<LocalPhysicsEngine.SpeedX, float> { }
+    [Serializable] public class Dictionary_SpeedXfloat : SerializableDictionary<LocalPhysicsEngine.SpeedXs, float> { }
 
-    [Serializable] public class Dictionary_SpeedYfloat : SerializableDictionary<LocalPhysicsEngine.SpeedY, float> { }
+    [Serializable] public class Dictionary_SpeedYfloat : SerializableDictionary<LocalPhysicsEngine.SpeedYs, float> { }
 }

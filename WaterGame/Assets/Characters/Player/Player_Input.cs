@@ -53,6 +53,14 @@ namespace masterFeature
                     {
                         controller.rise = false;
                     }
+                    if (VirtualInputManager.Instance.down)
+                    {
+                        controller.drop = true;
+                    }
+                    else
+                    {
+                        controller.drop = false;
+                    }
                     break;
             }
         }

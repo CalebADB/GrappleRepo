@@ -13,18 +13,19 @@ namespace masterFeature
         public new BoxCollider2D collider;
         public CollisionData collisionData;
         private RaycastOrigins raycastOrigins;
+        private Vector2 rayOrigin;
 
         // debug values
-        public float debugRayMultiplier;
+        public float debugRayMultiplier = 1;
 
+        // Skin for avoiding barrier clipping
         const float skinWidth = 0.015f;
 
+        // Define the resolution of the ray casting (higher resolution is slower but less likely to break)
         public int vertRayCount;
         private float vertRaySpacing;
         public int horzRayCount;
         private float horzRaySpacing;
-
-        Vector2 rayOrigin;
 
         private void Start()
         {
@@ -32,17 +33,27 @@ namespace masterFeature
             calculateRaySpacing();
         }
 
-        public Vector2 updateManager(Vector2 displacement)
+        public Vector2 checkDisplacement(Vector2 displacement)
         {
+            // RESET Collision Data
+            collisionData.rightCollision = false;
+            collisionData.leftCollision = false;
+            collisionData.topCollision = false;
+            collisionData.bottomCollision = false;
+
+            // SET ray origins to entity location
             updateRaycastOrigins();
 
+            // CHECK to see if the object will collide
             updateHorzCollision(displacement);
             updateVertCollision(displacement);
 
+            // IF object will collide THEN we calculate and return that distance
             if (collisionData.horzCollision || collisionData.vertCollision)
             {
                 return getCollisionDisplacement(displacement);
             }
+            // ELSE we return the displacement, knowing that it is safe to travel that far
             return displacement;
         }
 
@@ -77,6 +88,14 @@ namespace masterFeature
                 {
                     collisionData.horzCollision = true;
                     rayLength = hit.distance;
+                    if (direction.x > 0)
+                    {
+                        collisionData.rightCollision = true;
+                    }
+                    else
+                    {
+                        collisionData.leftCollision = true;
+                    }
                 }
 
                 Debug.DrawRay(rayOrigin, direction * rayLength * debugRayMultiplier, Color.magenta);
@@ -102,8 +121,15 @@ namespace masterFeature
                 {
                     collisionData.vertCollision = true;
                     rayLength = hit.distance;
+                    if (direction.y > 0)
+                    {
+                        collisionData.topCollision = true;
+                    }
+                    else
+                    {
+                        collisionData.bottomCollision = true;
+                    }
                 }
-
                 Debug.DrawRay(rayOrigin, direction * rayLength * debugRayMultiplier, Color.magenta);
             }
             collisionData.vertCollisionDistance = (rayLength - skinWidth) * direction.y;
@@ -142,9 +168,15 @@ namespace masterFeature
         public struct CollisionData
         {
             public bool horzCollision;
+            public bool rightCollision;
+            public bool leftCollision;
             public float horzCollisionDistance;
+
             public bool vertCollision;
+            public bool topCollision;
+            public bool bottomCollision;
             public float vertCollisionDistance;
+            
         }
 
         private struct RaycastOrigins

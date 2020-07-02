@@ -12,28 +12,27 @@ namespace masterFeature
         private Controller parentController;
         public PhysicsEngine physicsEngine;
         public LocalCollisionManager localCollisionManager;
-        public Controller.EnvState env = Controller.EnvState.Empty;
 
         // Speeds
-        public enum SpeedX
+        public enum SpeedXs
         {
             newSpeed,
-            idle,
+            zero,
             walk,
             run,
             crawl,
             slide,
             air
         }
-        public Dictionary_SpeedXfloat SpeedXs = new Dictionary_SpeedXfloat();
-        public enum SpeedY
+        public Dictionary_SpeedXfloat speedXDict = new Dictionary_SpeedXfloat();
+        public enum SpeedYs
         {
             newSpeed,
-            idle,
+            zero,
             jump,
             rise
         }
-        public Dictionary_SpeedYfloat SpeedYs = new Dictionary_SpeedYfloat();
+        public Dictionary_SpeedYfloat speedYDict = new Dictionary_SpeedYfloat();
         public Vector2 stateSpeed;
 
         // Velocity
@@ -41,31 +40,119 @@ namespace masterFeature
         public Vector2 envVelocity;
         public Vector2 velocity;
 
-        // displacement
+        // Acceleration
+        public float antiGravity;
+
+        // final displacement
         private Vector2 displacement;
 
         // Start is called before the first frame update
         private void Start()
         {
-            env = getController().env;
             localCollisionManager = GetComponent<LocalCollisionManager>();
-            SpeedXs.Add(SpeedX.idle, 0.0f);
-            SpeedXs.Add(SpeedX.walk, 2.0f);
-            SpeedXs.Add(SpeedX.run, 3.5f);
-            SpeedXs.Add(SpeedX.crawl, 0.5f);
-            SpeedXs.Add(SpeedX.slide, 2.5f);
-            SpeedXs.Add(SpeedX.air, 2.0f);
+            speedXDict.Add(SpeedXs.zero, 0.0f);
+            speedXDict.Add(SpeedXs.walk, 2.0f);
+            speedXDict.Add(SpeedXs.run, 3.5f);
+            speedXDict.Add(SpeedXs.crawl, 0.5f);
+            speedXDict.Add(SpeedXs.slide, 2.5f);
+            speedXDict.Add(SpeedXs.air, 2.0f);
 
-            SpeedYs.Add(SpeedY.idle, 0.0f);
-            SpeedYs.Add(SpeedY.jump, 8.0f);
-            SpeedYs.Add(SpeedY.rise, 0.4f);
+            speedYDict.Add(SpeedYs.zero, 0.0f);
+            speedYDict.Add(SpeedYs.jump, 5.0f);
+            speedYDict.Add(SpeedYs.rise, 5.0f);
         }
 
         // Update is called once per frame
         public void updateEngine()
         {
-            // Enviromental velocity
-            switch (env)
+            //setup
+            frameReset();
+            parentController = getController();
+
+            // Calculate Velocity
+            calculateInputVelocity();
+            calculateEnvVelocity();
+            velocity = envVelocity + inputVelocity;
+
+            // Calculate displacement
+            displacement = velocity * Time.deltaTime;
+
+            // Collisions Management
+            displacement = localCollisionManager.checkDisplacement(displacement);
+            if (localCollisionManager.collisionData.bottomCollision)
+            {
+                setStateSpeedY(SpeedYs.zero);
+                parentController.env = Controller.EnvState.Ground;
+            }
+            if (localCollisionManager.collisionData.topCollision)
+            {
+                envVelocity.y = -inputVelocity.y;
+            }
+
+            // Displace object
+            this.gameObject.transform.Translate(displacement);
+        }
+
+        private void setStateSpeedX(SpeedXs speedX)
+        {
+            stateSpeed.x = speedXDict[speedX];
+        }
+        private void setStateSpeedY(SpeedYs speedY)
+        {
+            stateSpeed.y = speedYDict[speedY];
+        }
+        private void setStateSpeed(SpeedXs speedX, SpeedYs speedY)
+        {
+            stateSpeed.x = speedXDict[speedX];
+            stateSpeed.y = speedYDict[speedY];
+        }
+
+        public Controller getController()
+        {
+            if (parentController == null)
+            {
+                parentController = GetComponentInParent<Controller>();
+            }
+            return parentController;
+        }
+
+        public void calculateInputVelocity()
+        {
+            switch (parentController.env)
+            {
+                case Controller.EnvState.Empty:
+                    Debug.Log("Environment is not set.");
+                    break;
+                case Controller.EnvState.Water:
+                    break;
+                case Controller.EnvState.Ground:
+                    setStateSpeed(SpeedXs.run, SpeedYs.zero);
+                    if (parentController.rise)
+                    {
+                        envVelocity.y += speedYDict[SpeedYs.jump];
+                        parentController.env = Controller.EnvState.Air;
+                    }
+                    break;
+                case Controller.EnvState.Hang:
+                    break;
+                case Controller.EnvState.Air:
+                    setStateSpeedY(SpeedYs.rise);
+                    break;
+                default:
+                    Debug.Log("Enviroment Missing");
+                    break;
+            }
+
+            if (parentController.rise) { inputVelocity.y = stateSpeed.y; }
+            if (parentController.moveRight ^ parentController.moveLeft)
+            {
+                if (parentController.moveRight) { inputVelocity.x = stateSpeed.x ; }
+                else { inputVelocity.x = -stateSpeed.x; }
+            }
+        }
+        private void calculateEnvVelocity()
+        {
+            switch (parentController.env)
             {
                 case Controller.EnvState.Empty:
                     Debug.Log("Environment is not set.");
@@ -78,7 +165,6 @@ namespace masterFeature
                 case Controller.EnvState.Hang:
                     break;
                 case Controller.EnvState.Air:
-                    if (localCollisionManager.collisionData.vertCollision) { envVelocity.y = 0f; }
                     //Accelerate due to gravity
                     break;
                 default:
@@ -86,48 +172,9 @@ namespace masterFeature
                     break;
             }
             envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
-            
-            // Calculate Velocity
-            velocity = envVelocity + inputVelocity;
-
-            // Calculate displacement
-            displacement = velocity * Time.deltaTime;
-
-            // Collisions Management
-            displacement = localCollisionManager.updateManager(displacement);
-            if (localCollisionManager.collisionData.vertCollision)
-            {
-                Debug.Log("No Env collision velo code");
-            }
-
-            // Displace object
-            this.gameObject.transform.Translate(displacement);
         }
 
-        public void setInputSpeed(SpeedX speedX)
-        {
-            stateSpeed.x = SpeedXs[speedX];
-        }
-        public void setInputSpeed(SpeedY speedY)
-        {
-            stateSpeed.y = SpeedYs[speedY];
-        }
-        public void setInputSpeed(SpeedX speedX, SpeedY speedY)
-        {
-            stateSpeed.x = SpeedXs[speedX];
-            stateSpeed.y = SpeedYs[speedY];
-        }
-
-        public Controller getController()
-        {
-            if (parentController == null)
-            {
-                parentController = GetComponentInParent<Controller>();
-            }
-            return parentController;
-        }
-
-        public void frameReset()
+        private void frameReset()
         {
             inputVelocity.Set(0f, 0f);
             displacement.Set(0f, 0f);

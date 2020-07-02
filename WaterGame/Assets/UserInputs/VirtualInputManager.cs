@@ -9,6 +9,7 @@ namespace masterFeature
         public bool left;
         public bool right;
         public bool up;
+        public bool down;
     }
 }
 
