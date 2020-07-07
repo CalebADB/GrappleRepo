@@ -17,10 +17,16 @@ namespace masterFeature
         public LocalPhysicsEngine localPhysicsEngine;
 
         // Input
+        public Player_Cursor cursor;
         public bool moveRight;
         public bool moveLeft;
         public bool rise;
         public bool drop;
+
+        /// <summary>
+        /// impactStrengthPercent represents the severity of all impacts during the frame. 25% is a small impact, 50% is medium, 75% is high (but you could go higher) 
+        /// </summary>
+        public float impactStrengthPercent;
 
         // Environment
         public enum EnvState
@@ -46,6 +52,13 @@ namespace masterFeature
         private void Start()
         {
             localPhysicsEngine = getLocalPhysicsEngine();
+            GameObject[] cursors = GameObject.FindGameObjectsWithTag("Cursor");
+            if (cursors.Length == 1)
+            {
+                cursor = cursors[0].GetComponentInChildren<Player_Cursor>();
+            }
+            else { Debug.Log("More then one object with cursor tag"); };
+
             animator = getAnimator();
         }
 
@@ -55,7 +68,7 @@ namespace masterFeature
             localPhysicsEngine.updateEngine();
 
             // Animation
-            setAnimatorParameters();
+            updateAnimatorParameters();
         }
 
         public LocalPhysicsEngine getLocalPhysicsEngine()
@@ -76,7 +89,7 @@ namespace masterFeature
             return animator;
         }
 
-        public void setAnimatorParameters()
+        public void updateAnimatorParameters()
         {
             // SET animator velocity floats
             animator.SetFloat(animatorHashCodes.velocityX, localPhysicsEngine.velocity.x);

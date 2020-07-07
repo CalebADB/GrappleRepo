@@ -7,7 +7,7 @@ namespace masterFeature
     /// <summary>
     /// Initial state where the animator is told which Animation tree to go to
     /// </summary>
-    [CreateAssetMenu(fileName = "New File", menuName = "Abilities/EnvironmentSelection")]
+    [CreateAssetMenu(fileName = "New File", menuName = "States/EnvironmentSelection")]
     public class State_EnvironmentSelection : StateData
     {
         public override void enterState(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo)
