@@ -69,11 +69,12 @@ namespace masterFeature
 
         public void updateEngine()
         {
-            //setup
-            frameReset();
+            // Setup
             parentController = getController();
+            frameReset();
 
-            // Calculate Velocity
+
+            // Calculate velocity
             updateInputVelocity();
             updateEnvVelocity();
             velocity = envVelocity + inputVelocity;
@@ -81,13 +82,14 @@ namespace masterFeature
             // Calculate displacement
             displacement = velocity * Time.deltaTime;
 
-            // Collisions Management
+            // Collisions management
             displacement = localCollisionManager.checkDisplacement(displacement);
-            if (localCollisionManager.collisionData.bottomCollision)
-            {
-                setStateSpeedY(SpeedYs.zero);
-                parentController.env = Controller.EnvState.Ground;
-            }
+
+            // Post displacement reactions
+            updateControllerImpactStrength();
+            updateEnv();
+
+            // Movement correction (CHECK HERE FOR BUGS)
             if (localCollisionManager.collisionData.topCollision)
             {
                 envVelocity.y = -inputVelocity.y;
@@ -111,31 +113,19 @@ namespace masterFeature
             stateSpeed.y = speedYDict[speedY];
         }
 
-        public void updateInputVelocity()
+        private void updateInputVelocity()
         {
             // SET State Speed based on the parents environment
             switch (parentController.env)
             {
-                case Controller.EnvState.Empty:
-                    Debug.Log("Environment is not set.");
-                    break;
-                case Controller.EnvState.Water:
-                    break;
                 case Controller.EnvState.Ground:
                     setStateSpeed(SpeedXs.run, SpeedYs.zero);
-                    if (parentController.rise)
-                    {
-                        envVelocity.y += speedYDict[SpeedYs.jump];
-                        parentController.env = Controller.EnvState.Air;
-                    }
-                    break;
-                case Controller.EnvState.Hang:
                     break;
                 case Controller.EnvState.Air:
                     setStateSpeedY(SpeedYs.rise);
                     break;
                 default:
-                    Debug.Log("Enviroment Missing");
+                    Debug.Log("Enviroment Definition Missing");
                     break;
             }
 
@@ -152,30 +142,75 @@ namespace masterFeature
             // SET State Speed based on the parents environment
             switch (parentController.env)
             {
-                case Controller.EnvState.Empty:
-                    Debug.Log("Environment is not set.");
-                    break;
-                case Controller.EnvState.Water:
-                    break;
                 case Controller.EnvState.Ground:
                     envVelocity.y = 0f;
-                    break;
-                case Controller.EnvState.Hang:
+                    if (parentController.rise)
+                    {
+                        envVelocity.y += speedYDict[SpeedYs.jump];
+                    }
                     break;
                 case Controller.EnvState.Air:
-                    //Accelerate due to gravity
+                    // wind?
                     break;
                 default:
                     Debug.Log("Enviroment Missing");
                     break;
             }
-
-            // UPDATE velocity using statespeed and input
             envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
+        }
+
+        private void updateControllerImpactStrength()
+        {
+            parentController.impactStrengthPercent = 0f;
+            switch (parentController.env)
+            {
+                case Controller.EnvState.Ground:
+                    if (parentController.rise)
+                    {
+                        parentController.impactStrengthPercent += 10f;
+                    }
+                    break;
+                case Controller.EnvState.Air:
+                    if (localCollisionManager.collisionData.vertCollision)
+                    {
+                        parentController.impactStrengthPercent += 20f;
+                    }
+                    //if (localCollisionManager.collisionData.horzCollision)
+                    //{
+                    //    parentController.impactStrengthPercent += 25f;
+                    //}
+                    break;
+                default:
+                    Debug.Log("Enviroment Missing");
+                    break;
+            }
+        }
+
+        private void updateEnv()
+        {
+            switch (parentController.env)
+            {
+                case Controller.EnvState.Ground:
+                    if (parentController.rise || !localCollisionManager.collisionData.bottomCollision)
+                    {
+                        parentController.env = Controller.EnvState.Air;
+                    }
+                    break;
+                case Controller.EnvState.Air:
+                    if (localCollisionManager.collisionData.bottomCollision)
+                    {
+                        parentController.env = Controller.EnvState.Ground;
+                    }
+                    break;
+                default:
+                    Debug.Log("Enviroment Missing");
+                    break;
+            }
         }
 
         private void frameReset()
         {
+            parentController.impactStrengthPercent = 0f;
             inputVelocity.Set(0f, 0f);
             displacement.Set(0f, 0f);
         }
