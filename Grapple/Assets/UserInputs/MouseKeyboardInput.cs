@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    public class KeyboardInput : MonoBehaviour
+    public class MouseKeyboardInput : MonoBehaviour
     {
         void Update()
         {

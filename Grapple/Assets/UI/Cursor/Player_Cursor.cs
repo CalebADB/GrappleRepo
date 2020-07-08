@@ -27,7 +27,7 @@ namespace masterFeature
         // Update is called once per frame
         void Update()
         {
-            this.transform.position = new Vector3(VirtualInputManager.Instance.cursorX * sensitivity, VirtualInputManager.Instance.cursorY * sensitivity, 0f);
+            this.transform.position = new Vector3(VirtualInputManager.Instance.cursorX * sensitivity, VirtualInputManager.Instance.cursorY * sensitivity, 0f) + player.gameObject.transform.position;
         }
     }
 }

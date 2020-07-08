@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace masterFeature
 {
+    /// <summary>
+    /// The camera grip follows the player and to the game types respective camera
+    /// </summary>
     public class CameraGrip : MonoBehaviour
     {
+        // SETUP
         private Player_Controller player;
         private Player_Cursor cursor;
 
@@ -23,6 +27,7 @@ namespace masterFeature
         }
         public CameraType cameraType;
 
+        // Camera Anchor Equation Variables
         public bool updateEquationVariables;
 
         [Range(-20f, 0f)]
@@ -96,13 +101,7 @@ namespace masterFeature
 
             Vector3 newCameraPos = (cameraTarget * cameraFollowFactor) + (cameraPos * (1f - cameraFollowFactor));
             newCameraPos.z = cameraDistance;
-            newCameraPos = newCameraPos;
             this.transform.position = newCameraPos;
-        }
-
-        public void shake()
-        {
-
         }
 
         public void updateCameraVariables()

@@ -17,7 +17,6 @@ namespace masterFeature
         public LocalPhysicsEngine localPhysicsEngine;
 
         // Input
-        public Player_Cursor cursor;
         public bool moveRight;
         public bool moveLeft;
         public bool rise;
@@ -51,14 +50,6 @@ namespace masterFeature
 
         private void Start()
         {
-            localPhysicsEngine = getLocalPhysicsEngine();
-            GameObject[] cursors = GameObject.FindGameObjectsWithTag("Cursor");
-            if (cursors.Length == 1)
-            {
-                cursor = cursors[0].GetComponentInChildren<Player_Cursor>();
-            }
-            else { Debug.Log("More then one object with cursor tag"); };
-
             animator = getAnimator();
         }
 
@@ -79,7 +70,6 @@ namespace masterFeature
             }
             return localPhysicsEngine;
         }
-
         public Animator getAnimator()
         {
             if (animator == null)
