@@ -7,11 +7,12 @@ namespace masterFeature
     public class Player_Input : MonoBehaviour
     {
         private Player_Controller player;
+        private CameraGrip cameraGrip;
+
         public enum GameStates
         {
-            MainMenu,
             Play,
-            Inventory
+            Pause
         }
         public GameStates gameState;
         
@@ -23,6 +24,12 @@ namespace masterFeature
                 player = players[0].GetComponentInChildren<Player_Controller>();
             }
             else { Debug.Log("More then one object with player tag"); };
+            GameObject[] cameraGrips = GameObject.FindGameObjectsWithTag("MainCamera");
+            if (cameraGrips.Length == 1)
+            {
+                cameraGrip = cameraGrips[0].GetComponentInChildren<CameraGrip>();
+            }
+            else { Debug.Log("More then one object with MainCamera tag"); };
         }
 
         void Update()
@@ -31,7 +38,13 @@ namespace masterFeature
             switch (gameState)
             {
                 case GameStates.Play:
-                    
+                    Cursor.lockState = CursorLockMode.Confined;
+                    if (VirtualInputManager.Instance.exit)
+                    {
+                        player.pause = true;
+                        cameraGrip.cameraHeld = CameraGrip.CameraType.PauseMenu;
+                        gameState = GameStates.Pause;
+                    }
                     if (VirtualInputManager.Instance.right)
                     {
                         player.moveRight = true;
@@ -63,6 +76,14 @@ namespace masterFeature
                     else
                     {
                         player.drop = false;
+                    }
+                    break;
+                case GameStates.Pause:
+                    if (VirtualInputManager.Instance.exit)
+                    {
+                        player.pause = false;
+                        cameraGrip.cameraHeld = CameraGrip.CameraType.Play;
+                        gameState = GameStates.Play;
                     }
                     break;
             }

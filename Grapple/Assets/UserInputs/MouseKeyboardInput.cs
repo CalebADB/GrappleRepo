@@ -4,12 +4,52 @@ using UnityEngine;
 
 namespace masterFeature
 {
+    /// <summary>
+    /// Script for reading Input from a keyboard and mouse setup.
+    /// </summary>
     public class MouseKeyboardInput : MonoBehaviour
     {
-        void Update()
+        CameraGrip cameraGrip;
+
+        private void Start()
         {
-            VirtualInputManager.Instance.cursorX = Input.mousePosition.x / 32;
-            VirtualInputManager.Instance.cursorY = Input.mousePosition.y / 32;
+            GameObject[] cameraGrips = GameObject.FindGameObjectsWithTag("MainCamera");
+            if (cameraGrips.Length == 1) { cameraGrip = cameraGrips[0].GetComponentInChildren<CameraGrip>(); }
+            else { Debug.Log("More then one object with cameraGrips tag"); };
+        }
+        private void Update()
+        {
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                VirtualInputManager.Instance.exit = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.exit = false;
+            }
+
+            Vector2 cursorNormalized = cameraGrip.getCameraHeld().ScreenToViewportPoint(Input.mousePosition);
+            VirtualInputManager.Instance.cursorX = cursorNormalized.x - 0.5f;
+            VirtualInputManager.Instance.cursorY = cursorNormalized.y - 0.5f;
+
+            if (Input.GetMouseButton(0))
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                VirtualInputManager.Instance.button1 = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.button1 = false;
+            }
+            if (Input.GetMouseButton(1))
+            {
+                VirtualInputManager.Instance.button2 = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.button2 = false;
+            }
 
             if (Input.GetKey(KeyCode.A))
             {

@@ -13,11 +13,6 @@ namespace masterFeature
         public float timeDialation;
         public Gravity gravity;
 
-        public void Awake()
-        {
-            Time.timeScale = timeDialation;
-        }
-
         private void Start()
         {
             gravity = this.GetComponent<Gravity>();

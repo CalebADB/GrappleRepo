@@ -17,6 +17,7 @@ namespace masterFeature
         public LocalPhysicsEngine localPhysicsEngine;
 
         // Input
+        public bool pause;
         public bool moveRight;
         public bool moveLeft;
         public bool rise;
@@ -56,7 +57,10 @@ namespace masterFeature
         private void Update()
         {
             // Physics
-            localPhysicsEngine.updateEngine();
+            if (!pause)
+            {
+                localPhysicsEngine.updateEngine();
+            }
 
             // Animation
             updateAnimatorParameters();
