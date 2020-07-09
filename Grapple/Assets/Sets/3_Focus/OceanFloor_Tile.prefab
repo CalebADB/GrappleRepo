@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6586679110135485689}
   - component: {fileID: 6586679110135485688}
   - component: {fileID: 6586679110135485695}
+  - component: {fileID: 6351526952878002277}
   m_Layer: 0
-  m_Name: OceanFloor_Tile (0)
+  m_Name: OceanFloor_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -476431323
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a50400c4252ac5b41a698f3032657110, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -108,3 +109,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &6351526952878002277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586679110135485690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 73c898e589e6c3755f48f9bb253c9ae3410bb8d497f67fd169a2908b00000000
+  m_ShapePath:
+  - {x: -0.16, y: -0.98, z: 0}
+  - {x: 0.16, y: -0.98, z: 0}
+  - {x: 0.16, y: 0, z: 0}
+  - {x: -0.16, y: 0, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -22020
