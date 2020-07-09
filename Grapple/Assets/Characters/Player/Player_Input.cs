@@ -16,7 +16,7 @@ namespace masterFeature
         }
         public GameStates gameState;
         
-        private void Awake()
+        private void Start()
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             if (players.Length == 1)

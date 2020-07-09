@@ -99,7 +99,6 @@ namespace masterFeature
             return parentController;
         }
 
-
         private void setStateSpeedX(SpeedXs speedX)
         {
             stateSpeed.x = speedXDict[speedX];

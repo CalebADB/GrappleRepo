@@ -30,7 +30,7 @@ namespace masterFeature
 
         // Camera Anchor Equation Variables
         public bool updateEquationVariables;
-
+        
         [Range(-20f, 0f)]
         public float cameraGripDistance;
         private float cameraMaxRadius;
