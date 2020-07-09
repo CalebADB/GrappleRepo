@@ -8,23 +8,19 @@ namespace masterFeature
     [RequireComponent(typeof(LocalPhysicsEngine), typeof(Animator))]
     public class Controller : MonoBehaviour
     {
-        // Debug
-        public int debugInt;
-        public int debugBool;
-
         // Physics:
         // Prep
         public LocalPhysicsEngine localPhysicsEngine;
 
         // Input
-        public Player_Cursor cursor;
+        public bool pause;
         public bool moveRight;
         public bool moveLeft;
         public bool rise;
         public bool drop;
 
         /// <summary>
-        /// impactStrengthPercent represents the severity of all impacts during the frame. 25% is a small impact, 50% is medium, 75% is high (but you could go higher) 
+        /// impactStrengthPercent represents the severity of all impacts during the frame. 10% is a small impact, 20% is medium, 30% is high (but you could go higher) 
         /// </summary>
         public float impactStrengthPercent;
 
@@ -51,21 +47,16 @@ namespace masterFeature
 
         private void Start()
         {
-            localPhysicsEngine = getLocalPhysicsEngine();
-            GameObject[] cursors = GameObject.FindGameObjectsWithTag("Cursor");
-            if (cursors.Length == 1)
-            {
-                cursor = cursors[0].GetComponentInChildren<Player_Cursor>();
-            }
-            else { Debug.Log("More then one object with cursor tag"); };
-
             animator = getAnimator();
         }
 
         private void Update()
         {
             // Physics
-            localPhysicsEngine.updateEngine();
+            if (!pause)
+            {
+                localPhysicsEngine.updateEngine();
+            }
 
             // Animation
             updateAnimatorParameters();
@@ -79,7 +70,6 @@ namespace masterFeature
             }
             return localPhysicsEngine;
         }
-
         public Animator getAnimator()
         {
             if (animator == null)

@@ -58,15 +58,6 @@ namespace masterFeature
             speedYDict.Add(SpeedYs.rise, 4.0f);
         }
 
-        public Controller getController()
-        {
-            if (parentController == null)
-            {
-                parentController = GetComponentInParent<Controller>();
-            }
-            return parentController;
-        }
-
         public void updateEngine()
         {
             // Setup
@@ -97,6 +88,15 @@ namespace masterFeature
 
             // Displace object
             this.gameObject.transform.Translate(displacement);
+        }
+
+        public Controller getController()
+        {
+            if (parentController == null)
+            {
+                parentController = GetComponentInParent<Controller>();
+            }
+            return parentController;
         }
 
         private void setStateSpeedX(SpeedXs speedX)
@@ -185,7 +185,6 @@ namespace masterFeature
                     break;
             }
         }
-
         private void updateEnv()
         {
             switch (parentController.env)

@@ -4,13 +4,17 @@ using UnityEngine;
 
 namespace masterFeature
 {
+    /// <summary>
+    /// The camera grip follows the player and to the game types respective camera
+    /// </summary>
     public class CameraGrip : MonoBehaviour
     {
+        // SETUP
         private Player_Controller player;
         private Player_Cursor cursor;
 
-        public Camera_Play camera_Play;
-        public Camera_Menu camera_Menu;
+        public CameraScript camera_Play;
+        public CameraScript camera_PauseMenu;
 
         private Vector2 cameraPos;
         private Vector2 playerPos;
@@ -19,20 +23,19 @@ namespace masterFeature
         public enum CameraType
         {
             Play,
-            Menu
+            PauseMenu
         }
-        public CameraType cameraType;
+        public CameraType cameraHeld;
+        private CameraType cameraHeldLastFrame;
 
+        // Camera Anchor Equation Variables
         public bool updateEquationVariables;
-
+        
         [Range(-20f, 0f)]
-        public float cameraDistance;
-        [Range(0.01f, 10f)]
-        public float cameraMaxRadius;
-        [Range(0.01f, 4f)]
-        public float cameraCursorPullFactor;
-        [Range(0.0001f, 0.5f)]
-        public float cameraFollowFactor;
+        public float cameraGripDistance;
+        private float cameraMaxRadius;
+        private float cameraCursorPullFactor;
+        private float cameraFollowFactor;
 
         private float radialAndSeverityRatio;
         private float flatteningValue;
@@ -47,32 +50,75 @@ namespace masterFeature
             if (cursors.Length == 1) { cursor = cursors[0].GetComponentInChildren<Player_Cursor>(); }
             else { Debug.Log("More then one object with cursor tag"); };
 
-            this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraDistance);
+            CameraScript[] cameraScripts = GetComponentsInChildren<CameraScript>();
+            if (cameraScripts.Length == 2)
+            {
+                foreach (CameraScript cameraScript in cameraScripts)
+                {
+                    if (cameraScript.gameObject.name == "Camera_Play")
+                    {
+                        camera_Play = cameraScript;
+                    }
+                    else if (cameraScript.gameObject.name == "Camera_PauseMenu")
+                    {
+                        camera_PauseMenu = cameraScript;
+                    }
+                    else
+                    {
+                        Debug.Log("Camera not found");
+                    }
+                }
+            }
+            else { Debug.Log("There should only be " + 2 + " cameras"); };
+
+            useCamera(cameraHeld);
             updateCameraVariables();
+
+            this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraGripDistance);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (updateEquationVariables)
+            if(cameraHeld != cameraHeldLastFrame)
+            {
+                useCamera(cameraHeld);
+            }
+            else if (updateEquationVariables)
             {
                 updateCameraVariables();
                 updateEquationVariables = false;
-
             }
 
-            switch (cameraType)
+            switch (cameraHeld)
             {
                 case CameraType.Play:
                     camera_Play.cameraShaker.addTrauma(player.impactStrengthPercent);
                     camera_Play.cameraShaker.shake();
                     break;
+                case CameraType.PauseMenu:
+                    break;
             }
+            cameraHeldLastFrame = cameraHeld;
         }
 
         private void FixedUpdate()
         {
             followPlayer();
+        }
+
+        public Camera getCameraHeld()
+        {
+            switch (cameraHeld)
+            {
+                case (CameraType.Play):
+                    return camera_Play.GetComponent<Camera>();
+                case (CameraType.PauseMenu):
+                    return camera_PauseMenu.GetComponent<Camera>();
+            }
+
+            Debug.Log("Camera type not selected.");
+            return Camera.current;
         }
 
         void followPlayer()
@@ -92,21 +138,41 @@ namespace masterFeature
                 distPlayerToAnchor = (3 * distPlayerToCursor /4);
             }
             Vector2 cameraTarget = playerPos + (distPlayerToAnchor * unitVectPlayerToCursor);
-            Debug.DrawLine(playerPos, cameraTarget, Color.magenta, 0.001f);
-
             Vector3 newCameraPos = (cameraTarget * cameraFollowFactor) + (cameraPos * (1f - cameraFollowFactor));
-            newCameraPos.z = cameraDistance;
-            newCameraPos = newCameraPos;
+            newCameraPos.z = cameraGripDistance;
             this.transform.position = newCameraPos;
         }
 
-        public void shake()
+        public void useCamera(CameraType cameraHeld)
         {
+            Camera[] cameraScripts = GetComponentsInChildren<Camera>();
+            switch (cameraHeld)
+            {
+                case (CameraType.Play):
+                    camera_Play.GetComponent<Camera>().enabled = true;
+                    camera_PauseMenu.GetComponent<Camera>().enabled = false;
 
+                    cameraMaxRadius = camera_Play.cameraMaxRadius;
+                    cameraCursorPullFactor = camera_Play.cameraCursorPullFactor;
+                    cameraFollowFactor = camera_Play.cameraFollowFactor;
+
+                    break;
+                case (CameraType.PauseMenu):
+                    camera_Play.GetComponent<Camera>().enabled = false;
+                    camera_PauseMenu.GetComponent<Camera>().enabled = true;
+
+                    cameraMaxRadius = camera_PauseMenu.cameraMaxRadius;
+                    cameraCursorPullFactor = camera_PauseMenu.cameraCursorPullFactor;
+                    cameraFollowFactor = camera_PauseMenu.cameraFollowFactor;
+
+                    this.transform.position = player.transform.position;
+                    break;
+            }
         }
 
         public void updateCameraVariables()
         {
+
             radialAndSeverityRatio = cameraMaxRadius/cameraCursorPullFactor;
             flatteningValue = -(radialAndSeverityRatio/(Mathf.Log(2)));
         }

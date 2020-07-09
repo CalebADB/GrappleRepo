@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace masterFeature
 {
+    /// <summary>
+    /// The Singleton class is used an inheritance to maintain that only one version of a gameobject exists in the game
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
