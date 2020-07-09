@@ -47,7 +47,9 @@ namespace masterFeature
 
         private void Start()
         {
+            getLocalPhysicsEngine();
             animator = getAnimator();
+            animatorHashCodes = GameObject.FindObjectOfType<AnimatorHashCodes>();
         }
 
         private void Update()
@@ -66,7 +68,7 @@ namespace masterFeature
         {
             if (localPhysicsEngine == null)
             {
-                localPhysicsEngine = this.GetComponentInParent<LocalPhysicsEngine>();
+                localPhysicsEngine = this.gameObject.GetComponent<LocalPhysicsEngine>();
             }
             return localPhysicsEngine;
         }

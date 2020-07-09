@@ -10,7 +10,7 @@ namespace masterFeature
     {
         // Prep
         private Controller parentController;
-        public PhysicsEngine physicsEngine;
+        private PhysicsEngine physicsEngine;
         public LocalCollisionManager localCollisionManager;
 
         // Speeds
@@ -45,6 +45,7 @@ namespace masterFeature
 
         private void Start()
         {
+            physicsEngine = GameObject.FindObjectOfType<PhysicsEngine>();
             localCollisionManager = GetComponent<LocalCollisionManager>();
             speedXDict.Add(SpeedXs.zero, 0.0f);
             speedXDict.Add(SpeedXs.walk, 2.0f);
