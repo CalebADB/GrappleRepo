@@ -9,7 +9,7 @@ namespace masterFeature
     /// </summary>
     public class MouseKeyboardInput : MonoBehaviour
     {
-        CameraGrip cameraGrip;
+        private CameraGrip cameraGrip;
 
         private void Start()
         {

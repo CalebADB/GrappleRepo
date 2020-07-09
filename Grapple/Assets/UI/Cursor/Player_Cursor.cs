@@ -9,8 +9,8 @@ namespace masterFeature
     /// </summary>
     public class Player_Cursor : MonoBehaviour
     {
-        Player_Controller player;
-        CameraGrip cameraGrip;
+        private Player_Controller player;
+        private CameraGrip cameraGrip;
         public float sensitivity;
 
         private void Start()
@@ -24,7 +24,7 @@ namespace masterFeature
             else { Debug.Log("More then one object with cameraGrips tag"); };
         }
 
-        void Update()
+        private void Update()
         {
             Cursor.visible = false;
 

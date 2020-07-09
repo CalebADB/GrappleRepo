@@ -104,7 +104,6 @@ namespace masterFeature
 
         private void FixedUpdate()
         {
-
             followPlayer();
         }
 

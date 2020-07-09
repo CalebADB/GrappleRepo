@@ -7,9 +7,6 @@ namespace masterFeature
     public class CameraShaker : MonoBehaviour
     {
         private float shakeSeed;
-        private int debugInt = 1;
-        public float shakyAngleTotal;
-        public float shakyAngleAvg;
 
         [Range(0f, 20f)]
         public float shakeAngleMax;
@@ -24,14 +21,13 @@ namespace masterFeature
         private float traumaDampening;
         public float traumaCur;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             shakeSeed = Random.Range(0f, 1f);
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             traumaDampening = traumaDampeningFactor / 100;
             if (traumaCur > 0f)
@@ -64,13 +60,8 @@ namespace masterFeature
                 shakyOffSet.y  = shakeOffsetMaxY * Mathf.Pow(traumaCur, 2) * (2 * ((Mathf.PerlinNoise(shakeSeed + 4f, Time.time * shakeMaxSpeed) - 0.45f)));
                 float shakyAngle = shakeAngleMax * Mathf.Pow(traumaCur, 2) * (2 * ((Mathf.PerlinNoise(shakeSeed + 2f, Time.time * shakeMaxSpeed) - 0.45f)));
 
-                shakyAngleTotal += shakyAngle;
-                shakyAngleAvg = shakyAngleTotal / debugInt; 
-
-
                 this.gameObject.transform.localPosition = shakyOffSet;
                 this.gameObject.transform.rotation = Quaternion.AngleAxis(shakyAngle, Vector3.forward);
-                debugInt++;
             }
             else
             {

@@ -8,10 +8,6 @@ namespace masterFeature
     [RequireComponent(typeof(LocalPhysicsEngine), typeof(Animator))]
     public class Controller : MonoBehaviour
     {
-        // Debug
-        public int debugInt;
-        public int debugBool;
-
         // Physics:
         // Prep
         public LocalPhysicsEngine localPhysicsEngine;
@@ -24,7 +20,7 @@ namespace masterFeature
         public bool drop;
 
         /// <summary>
-        /// impactStrengthPercent represents the severity of all impacts during the frame. 25% is a small impact, 50% is medium, 75% is high (but you could go higher) 
+        /// impactStrengthPercent represents the severity of all impacts during the frame. 10% is a small impact, 20% is medium, 30% is high (but you could go higher) 
         /// </summary>
         public float impactStrengthPercent;
 
