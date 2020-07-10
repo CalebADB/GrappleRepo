@@ -25,6 +25,9 @@ namespace masterFeature
         {
             switch (grappler.grapplerState)
             {
+                case (Grappler.GrapplerStates.hookIn):
+                    this.gameObject.transform.position = grappler.anchor;
+                    break;
                 case (Grappler.GrapplerStates.hookOut):
                     velocity -= physicsEngine.gravity.gravityStrength * Time.deltaTime;
                     Vector2 displacement = velocity * Time.deltaTime;

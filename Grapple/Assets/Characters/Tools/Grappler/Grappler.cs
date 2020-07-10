@@ -62,6 +62,7 @@ namespace masterFeature
                     {
                         hook.transform.position = anchor;
                         grapplerState = GrapplerStates.hookIn;
+                        setRender(false);
                     }
                     pullForce.x = pullStrength * (hook.attachPos.x - anchor.x);
                     pullForce.y = pullStrength * (hook.attachPos.y - anchor.y);
