@@ -14,6 +14,7 @@ namespace masterFeature
 
         // Input
         public bool pause;
+        public bool useHook;
         public bool moveRight;
         public bool moveLeft;
         public bool rise;
@@ -39,13 +40,15 @@ namespace masterFeature
         // Prep
         private Animator animator;
 
-        // Sprite Direction
-        public Vector2 spriteScale;
-
         // HashCodes
         public AnimatorHashCodes animatorHashCodes;
 
         private void Start()
+        {
+            start();
+        }
+
+        public void start()
         {
             getLocalPhysicsEngine();
             animator = getAnimator();
@@ -106,13 +109,12 @@ namespace masterFeature
             // SET player sprite direction (Decide to mirror the sprite)
             if (moveRight && !moveLeft)
             {
-                spriteScale.x = Mathf.Abs(spriteScale.x);
+                GetComponent<SpriteRenderer>().flipX = false;
             }
             else if (!moveRight && moveLeft)
             {
-                spriteScale.x = -Mathf.Abs(spriteScale.x);
+                GetComponent<SpriteRenderer>().flipX = true;
             }
-            this.gameObject.transform.localScale = spriteScale;
         }
     }
 }

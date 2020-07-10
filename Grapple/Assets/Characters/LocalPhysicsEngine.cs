@@ -43,6 +43,11 @@ namespace masterFeature
         // final displacement
         private Vector2 displacement;
 
+        // Misc:
+        // GrapplingHook
+        public bool hasGrappler;
+        private Grappler grappler;
+
         private void Start()
         {
             physicsEngine = GameObject.FindObjectOfType<PhysicsEngine>();
@@ -57,6 +62,11 @@ namespace masterFeature
             speedYDict.Add(SpeedYs.zero, 0.0f);
             speedYDict.Add(SpeedYs.jump, 5.0f);
             speedYDict.Add(SpeedYs.rise, 4.0f);
+
+            if (hasGrappler)
+            {
+                grappler = this.gameObject.GetComponentInChildren<Grappler>();
+            }
         }
 
         public void updateEngine()
@@ -81,10 +91,14 @@ namespace masterFeature
             updateControllerImpactStrength();
             updateEnv();
 
-            // Movement correction (CHECK HERE FOR BUGS)
+            // Impact envVelocity correction 
             if (localCollisionManager.collisionData.topCollision)
             {
                 envVelocity.y = -inputVelocity.y;
+            }
+            if (localCollisionManager.collisionData.horzCollision)
+            {
+                envVelocity.y = 0;
             }
 
             // Displace object
@@ -157,6 +171,14 @@ namespace masterFeature
                     Debug.Log("Enviroment Missing");
                     break;
             }
+
+            if (hasGrappler)
+            {
+                grappler.updateGrapplingHook();
+                envVelocity.x += grappler.pullForce.x;
+                envVelocity.y += grappler.pullForce.y;
+            }
+
             envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;
         }
 
