@@ -7,7 +7,6 @@ namespace masterFeature
 {
     public class MusicManager : MonoBehaviour
     {
-        [SerializeField]
         private AudioSource audioSource;
 
         private MusicPlayingType musicPlayingType;
