@@ -91,14 +91,14 @@ namespace masterFeature
             updateControllerImpactStrength();
             updateEnv();
 
-            // Impact envVelocity correction 
+            // Impact envVelocity correction
             if (localCollisionManager.collisionData.topCollision)
             {
                 envVelocity.y = -inputVelocity.y;
             }
-            if (localCollisionManager.collisionData.horzCollision)
+            if (localCollisionManager.collisionData.horzCollision || localCollisionManager.collisionData.bottomCollision)
             {
-                envVelocity.y = 0;
+                envVelocity.x = 0;
             }
 
             // Displace object
@@ -175,8 +175,11 @@ namespace masterFeature
             if (hasGrappler)
             {
                 grappler.updateGrapplingHook();
-                envVelocity.x += grappler.pullForce.x;
-                envVelocity.y += grappler.pullForce.y;
+                if (grappler.grapplerState == Grappler.GrapplerStates.hookAttached)
+                {
+                    envVelocity.x += grappler.pullForce.x * Time.deltaTime;
+                    envVelocity.y += grappler.pullForce.y * Time.deltaTime;
+                }
             }
 
             envVelocity += physicsEngine.gravity.calculateGravity(this.transform.position) * Time.deltaTime;

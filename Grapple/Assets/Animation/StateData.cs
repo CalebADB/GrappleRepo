@@ -32,6 +32,14 @@ namespace masterFeature
                 animator.SetBool(animatorHashCodes.jumping, true);
             }
         }
+        public void checkToFall(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
+        {
+            // checks for upward/rise/jump input
+            if (!controller.localPhysicsEngine.localCollisionManager.collisionData.bottomCollision)
+            {
+                animator.SetBool(animatorHashCodes.collidedDown, false);
+            }
+        }
         public void checkToDrop(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             Debug.Log("Im an empty function:)");

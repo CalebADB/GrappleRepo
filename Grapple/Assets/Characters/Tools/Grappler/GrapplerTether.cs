@@ -7,21 +7,25 @@ namespace masterFeature
     public class GrapplerTether : MonoBehaviour
     {
         GrapplerHook hook;
+        public float debugFloat;
         Grappler grappler;
-        LineRenderer lineRenderer;
+        SpriteRenderer spriteRenderer;
+        public float tetherThickness;
+        private float tetherLength = 0;
 
         private void Start()
         {
-            lineRenderer = GetComponent<LineRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             grappler = GetComponentInParent<Grappler>();
             hook = grappler.GetComponentInChildren<GrapplerHook>();
         }
 
         private void Update()
         {
-//            lineRenderer.SetPosition(0, grappler.transform.position);
-  //          lineRenderer.SetPosition(0, hook.transform.position);
-            Debug.DrawLine(grappler.transform.position,hook.transform.position, new Color(160, 128, 64));
+            //Debug.Log(Mathf.Rad2Deg * Mathf.Acos( Vector3.Dot(Vector3.Normalize(grappler.anchor - grappler.target.transform.position), Vector3.left)));
+            //this.gameObject.transform.eulerAngles = new Vector3(0, 0, debugFloat);
+            //this.gameObject.transform.localScale = new Vector3(tetherLength, tetherThickness, 0);
+            Debug.DrawLine(grappler.anchor, hook.transform.position, new Color(160, 128, 64));
         }
     }
 }

@@ -7,7 +7,7 @@ namespace masterFeature
     public class Grappler : MonoBehaviour
     {
         public Controller controller;
-        private Vector3 anchor;
+        public Vector3 anchor;
         public GameObject target;
         public GrapplerHook hook;
         public GrapplerTether tether;
@@ -15,6 +15,7 @@ namespace masterFeature
 
         public float pullStrength;
         public Vector2 pullForce;
+        public Vector2 pullForceMax;
 
         public enum GrapplerStates
         {
@@ -34,7 +35,6 @@ namespace masterFeature
         {
             pullForce = Vector3.zero;
             setAnchor(new Vector3(0f,0.4f,0));
-            //Debug.Log(grapplerState);
             switch (grapplerState)
             {
                 case GrapplerStates.hookIn:
@@ -63,7 +63,6 @@ namespace masterFeature
                         hook.transform.position = anchor;
                         grapplerState = GrapplerStates.hookIn;
                     }
-                    Debug.Log(hook.attachPos.x - anchor.x);
                     pullForce.x = pullStrength * (hook.attachPos.x - anchor.x);
                     pullForce.y = pullStrength * (hook.attachPos.y - anchor.y);
                     break;

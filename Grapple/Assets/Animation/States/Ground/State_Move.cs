@@ -24,6 +24,9 @@ namespace masterFeature
             // Can initiate Jump
             checkToJump(animator, controller, stateBase.getAnimatorHashCodes());
 
+            // Can fall off cliff
+            checkToFall(animator, controller, stateBase.getAnimatorHashCodes());
+
             // Check to return to idle
             checkToIdle(animator, controller, stateBase.getAnimatorHashCodes());
         }

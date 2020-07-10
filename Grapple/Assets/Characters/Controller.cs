@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace masterFeature
 {
-    [RequireComponent(typeof(LocalPhysicsEngine), typeof(Animator))]
+    [RequireComponent(typeof(LocalPhysicsEngine), typeof(Animator))]//,typeof(LocalSoundEngine) 
     public class Controller : MonoBehaviour
     {
         // Physics:
