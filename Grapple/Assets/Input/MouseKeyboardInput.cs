@@ -19,7 +19,6 @@ namespace masterFeature
         }
         private void Update()
         {
-            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 VirtualInputManager.Instance.exit = true;

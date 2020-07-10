@@ -15,7 +15,7 @@ namespace masterFeature
         public abstract void updateState(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
         public abstract void exitState(StateBase stateBase, Animator animator, AnimatorStateInfo stateInfo);
 
-        // accessible functions for all Abilities
+        // accessible functions for all States
         public void checkToMove(Animator animator, Controller controller, AnimatorHashCodes animatorHashCodes)
         {
             // checks for movement input

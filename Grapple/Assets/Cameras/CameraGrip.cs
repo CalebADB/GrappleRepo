@@ -28,9 +28,7 @@ namespace masterFeature
         public CameraType cameraHeld;
         private CameraType cameraHeldLastFrame;
 
-        // Camera Anchor Equation Variables
-        public bool updateEquationVariables;
-        
+        // Camera Anchor Equation Variables        
         [Range(-20f, 0f)]
         public float cameraGripDistance;
         private float cameraMaxRadius;
@@ -72,7 +70,6 @@ namespace masterFeature
             else { Debug.Log("There should only be " + 2 + " cameras"); };
 
             useCamera(cameraHeld);
-            updateCameraVariables();
 
             this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, cameraGripDistance);
         }
@@ -80,14 +77,9 @@ namespace masterFeature
         // Update is called once per frame
         void Update()
         {
-            if(cameraHeld != cameraHeldLastFrame)
+            if((cameraHeld != cameraHeldLastFrame) || (camera_Play.UPDATE_VARIABLES || camera_Play.UPDATE_VARIABLES))
             {
                 useCamera(cameraHeld);
-            }
-            else if (updateEquationVariables)
-            {
-                updateCameraVariables();
-                updateEquationVariables = false;
             }
 
             switch (cameraHeld)
@@ -155,6 +147,10 @@ namespace masterFeature
                     cameraMaxRadius = camera_Play.cameraMaxRadius;
                     cameraCursorPullFactor = camera_Play.cameraCursorPullFactor;
                     cameraFollowFactor = camera_Play.cameraFollowFactor;
+                    camera_Play.updateCameraVariables();
+                    radialAndSeverityRatio = camera_Play.radialAndSeverityRatio;
+                    flatteningValue = camera_Play.flatteningValue;
+
 
                     break;
                 case (CameraType.PauseMenu):
@@ -164,17 +160,14 @@ namespace masterFeature
                     cameraMaxRadius = camera_PauseMenu.cameraMaxRadius;
                     cameraCursorPullFactor = camera_PauseMenu.cameraCursorPullFactor;
                     cameraFollowFactor = camera_PauseMenu.cameraFollowFactor;
+                    camera_PauseMenu.updateCameraVariables();
+                    radialAndSeverityRatio = camera_PauseMenu.radialAndSeverityRatio;
+                    flatteningValue = camera_PauseMenu.flatteningValue;
 
                     this.transform.position = player.transform.position;
                     break;
             }
-        }
-
-        public void updateCameraVariables()
-        {
-
-            radialAndSeverityRatio = cameraMaxRadius/cameraCursorPullFactor;
-            flatteningValue = -(radialAndSeverityRatio/(Mathf.Log(2)));
+            
         }
     }
 }

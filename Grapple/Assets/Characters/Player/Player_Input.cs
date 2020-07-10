@@ -40,7 +40,6 @@ namespace masterFeature
                         cameraGrip.cameraHeld = CameraGrip.CameraType.PauseMenu;
                         gameState = GameStates.Pause;
                     }
-
                     if (VirtualInputManager.Instance.button1)
                     {
                         player.useHook = true;

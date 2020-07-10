@@ -15,7 +15,7 @@ namespace masterFeature
 
         public float pullStrength;
         public Vector2 pullForce;
-        public Vector2 pullForceMax;
+        public float pullForceMax;
 
         public enum GrapplerStates
         {
@@ -65,6 +65,7 @@ namespace masterFeature
                     }
                     pullForce.x = pullStrength * (hook.attachPos.x - anchor.x);
                     pullForce.y = pullStrength * (hook.attachPos.y - anchor.y);
+                    if (pullForce.magnitude > pullForceMax) { pullForce = pullForceMax* pullForce.normalized; };
                     break;
             }
         }

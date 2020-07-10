@@ -52,17 +52,6 @@ namespace masterFeature
         {
             physicsEngine = GameObject.FindObjectOfType<PhysicsEngine>();
             localCollisionManager = GetComponent<LocalCollisionManager>();
-            speedXDict.Add(SpeedXs.zero, 0.0f);
-            speedXDict.Add(SpeedXs.walk, 2.0f);
-            speedXDict.Add(SpeedXs.run, 3.5f);
-            speedXDict.Add(SpeedXs.crawl, 0.5f);
-            speedXDict.Add(SpeedXs.slide, 2.5f);
-            speedXDict.Add(SpeedXs.air, 2.0f);
-
-            speedYDict.Add(SpeedYs.zero, 0.0f);
-            speedYDict.Add(SpeedYs.jump, 5.0f);
-            speedYDict.Add(SpeedYs.rise, 4.0f);
-
             if (hasGrappler)
             {
                 grappler = this.gameObject.GetComponentInChildren<Grappler>();
